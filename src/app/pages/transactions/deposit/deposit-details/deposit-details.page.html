@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button (click)="closeModal()" ion-button icon-only>
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title> {{ 'exchangeDetails.title' | translate }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ng-container *ngIf="deposit">
+    <div class="details-wrapper-information">
+      <h2>Source amount</h2>
+      <p>{{ deposit.sourceAmount }} {{ deposit.sourceCurrencyName }}</p>
+    </div>
+
+    <div class="details-wrapper-information">
+      <h2>Target amount</h2>
+      <p>{{ deposit.targetAmount }} {{ deposit.targetCurrencyName }}</p>
+    </div>
+
+    <div class="details-wrapper-information">
+      <h2>{{ 'purchaseDetails.createdAt' | translate }}</h2>
+      <p>
+        {{ deposit.createdAt | date: 'MMM d, y - H:mm:ss' }}
+      </p>
+    </div>
+
+    <div class="details-wrapper-information">
+      <h2>Resource URL</h2>
+      <p>Coinoro Retail</p>
+    </div>
+  </ng-container>
+</ion-content>

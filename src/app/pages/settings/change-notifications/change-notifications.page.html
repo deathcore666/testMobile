@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      {{ 'notifications.title' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding no-bounce>
+  <ion-item *ngIf="userSettings">
+    <ion-label>
+      {{ 'notifications.labelEmailNotifications' | translate }}
+    </ion-label>
+    <ion-toggle
+      [(ngModel)]="userSettings.emailNotify"
+      (click)="changeEmailNotification('email')"
+      checked="userSettings.emailNotify"
+      mode="ios">
+    </ion-toggle>
+  </ion-item>
+</ion-content>

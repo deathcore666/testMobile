@@ -1,0 +1,52 @@
+.uploader-footer-buttons {
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    width: 45%;
+  }
+}
+
+.delete-upload-file {
+  background: none;
+  padding: 0;
+}
+
+p {
+  font-size: 15px;
+  text-align: center;
+
+  b {
+    font-size: 16px;
+  }
+}
+
+#custom-click {
+
+  h4 {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+
+    ion-icon {
+      padding-left: 0;
+    }
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  position: relative;
+}
+
+.spinner-wrapper {
+  display: flex;
+  align-items: center;
+
+  ion-spinner {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+  }
+}

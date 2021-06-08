@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      {{ 'changeTypeOfVerification.title' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding no-bounce>
+
+  <form
+    #choosenTypeOfVerification="ngForm"
+    name="choosenTypeOfVerification"
+    class="pay-authentication"
+    novalidate>
+
+    <ion-item no-padding>
+      <ion-label position="stacked">
+        {{ 'changeTypeOfVerification.labelType' | translate }}
+      </ion-label>
+      <ion-select 
+        [(ngModel)]="choosenType" 
+        (ngModelChange)="typeChanged()" 
+        name='wallets' 
+        placeholder="{{ 'changeTypeOfVerification.placeholderType' | translate }}">
+        <ion-select-option
+          *ngFor="let type of verificationTypes"
+          [value]="type.value">
+    
+          {{ 'changeTypeOfVerification.' + type.value + '' | translate }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding *ngIf="showPhoneInput">
+      <ion-label position="stacked">
+        {{ 'changeTypeOfVerification.labelPhone' | translate }}
+      </ion-label>
+
+      <ion-input 
+        #phoneInput
+        name="phoneInput" 
+        type="tel" 
+        readonly
+        [(ngModel)]="phone" 
+        required></ion-input>
+    </ion-item>
+
+    <ion-item no-padding *ngIf="otpSecretCode && !hideGoogleAuthenticator">
+      <p class="otp-secret-code">
+        {{ otpSecretCode }}
+
+        <ion-icon
+          class="copy-icon"
+          name="ios-copy"
+          (click)="successCopy(otpSecretCode)">
+        </ion-icon>
+      </p>
+      <ion-label position="stacked">
+        {{ 'changeTypeOfVerification.labelOtp' | translate }}
+      </ion-label>
+      <ion-input
+        #otpInput
+        email
+        name="otpInput"
+        type="text"
+        placeholder="{{ 'changeTypeOfVerification.placeholderOtp' | translate }}"
+        [(ngModel)]="otpCode"
+        required></ion-input>
+        
+    </ion-item>
+
+    <button
+      *ngIf="!otpSecretCode"
+      type="submit"
+      [disabled]="disableButton || !choosenTypeOfVerification.valid"
+      (click)="chooseType()"
+      class="pay-main-button">
+
+      {{ 'changeTypeOfVerification.setType' | translate }}
+    </button>
+
+    <button
+      *ngIf="otpSecretCode && !hideGoogleAuthenticator"
+      type="submit"
+      (click)="confirmGoogleAuth()"
+      [disabled]="!otpCode"
+      class="pay-main-button">
+
+      {{ 'common.confirm' | translate }}
+    </button>
+  </form>
+</ion-content>

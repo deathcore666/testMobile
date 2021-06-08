@@ -1,0 +1,16 @@
+<ion-content padding no-bounce>
+  <div class="exchange-result-wrapper">
+    <div class="cancel-wrapper">
+      <ion-icon name="close-circle"></ion-icon>
+      <h1 class="cancel-wrapper-title">
+        {{ 'cancelPurchase.notification' | translate }}
+      </h1>
+      <button
+        [routerLink]="['/wallets']"
+        replaceUrl="true"
+        class="pay-main-button pay-cancel-button">
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </div>
+  </div>
+</ion-content>

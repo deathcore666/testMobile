@@ -1,0 +1,33 @@
+<ion-content class="ion-padding">
+  <ion-refresher (ionRefresh)="refresh($event)" slot="fixed">
+    <ion-refresher-content 
+      pullingIcon="arrow-dropdown"
+      refreshingSpinner="dots">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ng-container *ngIf="outcomeRequestList && outcomeRequestList.length > 0">
+    <ion-card (click)="openOutcomeDetailsModal(request._id)" *ngFor="let request of outcomeRequestList">
+
+      <ion-card-content class="pay-card-content-wrapper">
+        <svg-icon [ngClass]="currencyNameStyle(request.currencyName)" src="./assets/images/coin-icons/{{request.currencyCode}}.svg"></svg-icon>
+        <div class="pay-card-content-wrapper-description">
+          <span 
+            class="wallet-currency-name"
+            [ngClass]="currencyNameStyle(request.currencyName)">
+            
+            {{ request.amount }} {{ request.currencyCode }}
+          </span>
+        
+          <div class="wallet-name">{{ request.createdAt | date: 'MMM d, y - H:mm:ss'  }}</div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <app-not-found
+    *ngIf="showNotFound"
+    [title]="title"
+    [message]="message">
+  </app-not-found>
+</ion-content>

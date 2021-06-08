@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ 'swiftTransaction.title' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ng-container *ngIf="requisitesList">
+    <form
+      [formGroup]="swiftTransactionForm"
+      (ngSubmit)="createSwiftTransaction()"
+      class="pay-authentication"
+      novalidate>
+
+      <ng-container *ngFor="let item of requisitesList | keyvalue">
+        <ion-item no-padding>
+          <ion-label position="stacked">
+            {{ item?.value }}
+          </ion-label>
+          <ion-input
+            [formControlName]="item?.key"
+            name="accountAddressInput"
+            type="text"
+            required
+            placeholder="Enter {{ item?.value }}"
+            required>
+          </ion-input>
+        </ion-item>
+      </ng-container>
+
+      <button
+        [disabled]="swiftTransactionForm.invalid"
+        type="submit"
+        class="pay-main-button">
+
+        {{ 'common.send' | translate }}
+      </button>
+    </form>
+  </ng-container>
+</ion-content>

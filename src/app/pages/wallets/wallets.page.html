@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar style="display: flex; justify-content: space-between; align-items: center; width: 100%">
+    <button
+      [routerLink]="['/settings']"
+      class="pay-account-button">
+      <img alt="contacts" src="/assets/images/tab-icons/contacts.svg">
+    </button>
+
+    <ion-title>
+      {{ 'wallets.title' | translate }}
+    </ion-title>
+
+    <button
+      [routerLink]="['/qr-scanner']"
+      class="pay-scan-button">
+      <ion-icon class="qr-scanner" name="qr-scanner"></ion-icon>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-bounce class="ion-padding">
+  <ion-refresher (ionRefresh)="refresh($event)" slot="fixed">
+    <ion-refresher-content refreshingSpinner="bubbles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <app-not-found [message]="message" [title]="title" *ngIf="show"></app-not-found>
+
+  <button class="pay-main-button create-fiat-button" routerLink="/generate-crypto-wallet">
+    {{ 'wallets.generateCryptoWallet' | translate }}
+  </button>
+
+  <button
+    class="pay-main-button request-funds-button"
+    (click)="generateFiatWallet()"
+    *ngIf="disabledCreateFiatWallet">
+
+    {{ 'wallets.generateFiatButton' | translate }}
+  </button>
+
+  <ion-card *ngFor="let wallet of wallets" (click)="walletDetails(wallet.address, wallet.currencyType, wallet.currencyCode)">
+    <ion-card-content class="pay-card-content-wrapper">
+      <svg-icon [ngClass]="currencyNameStyle(wallet.currencyName)" src="./assets/images/coin-icons/{{wallet.currencyCode}}.svg"></svg-icon>
+      <div class="pay-card-content-wrapper-description">
+        <span
+          class="wallet-currency-name"
+          [ngClass]="currencyNameStyle(wallet.currencyName)">
+
+          {{ wallet.currencyName }}
+        </span>
+        <span class="wallet-balance">
+          {{ wallet.balance }} {{ wallet.currencyCode }}
+        </span>
+        <div class="wallet-name">{{ wallet.name }}</div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

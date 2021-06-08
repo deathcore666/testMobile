@@ -1,0 +1,41 @@
+app-confirm-purchase {
+
+  .currencyIcon {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    display: inline-block;
+  }
+
+  .internal-transactions-amount {
+
+    div {
+      padding: 15px 0;
+      text-align: left;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .pay-cancel-button {
+    min-height: 50px;
+    background: linear-gradient(to right, $dangerColor 0, #ed0350 100%);
+    color: $whiteColor;
+  }
+
+  .pay-transaction-footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      margin: 0;
+      width: 50%;
+
+      &:first-child {
+        margin-right: 20px;
+      }
+    }
+  }
+}

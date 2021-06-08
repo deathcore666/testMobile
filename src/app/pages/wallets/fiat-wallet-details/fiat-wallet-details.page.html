@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    
+    <ion-title *ngIf='wallet'> 
+      <span (click)="openRenameWalletModal()">{{ wallet.name }}</span>
+    </ion-title>
+
+    <button
+      [routerLink]="['/qr-scanner']"
+      class="pay-scan-button">
+      <ion-icon class="qr-scanner" name="qr-scanner"></ion-icon>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngIf='wallet'>
+  <ion-refresher (ionRefresh)="refresh($event)" slot="fixed">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      refreshingSpinner="dots">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div class="details-wrapper">
+    <div class="details-wrapper-options">
+      <span class="details-wrapper-options-balance">
+        <h2>{{ 'accountDetails.accountBalance' | translate }}</h2>
+        <p>{{ wallet.balance }} {{ wallet.currencyCode }}</p>
+
+        <svg-icon 
+          *ngIf="wallet.currencyName" 
+          src="assets/images/coin-icons/{{wallet.currencyCode}}.svg"></svg-icon>
+      </span>
+      <span class="details-wrapper-options-qr-code">
+        <div 
+          *ngIf="accountQrCode" 
+          [style.background-image]="accountQrCode" 
+          class="account-qr-image">
+        </div>
+      </span>
+    </div>
+    <ng-container *ngIf="wallet.type !== 'creditCard'">
+      <a class="account-details" (click)="getRequisites()" *ngIf="wallet.requisites">
+        <ion-icon mode="ios" name="eye"></ion-icon>
+        {{ 'accountDetails.title' | translate }}
+      </a>
+    </ng-container>
+  </div>
+
+  <div class="details-wrapper-information">
+    <h2>{{ 'accountDetails.accountNumber' | translate }}</h2>
+    <p class="details-wrapper-wallet-address">
+      <span>{{ wallet.address }}</span>
+      <ion-icon
+        class="copy-icon"
+        name="ios-copy"
+        (click)="successCopy(wallet.address)">
+      </ion-icon>
+    </p>
+  </div>
+
+  <div class="details-wrapper-information">
+    <h2>{{ 'accountDetails.accountCreatedAt' | translate }}</h2>
+    <p>{{ wallet.createdAt | date: 'MMM d, y - H:mm:ss' }}</p>
+  </div>
+  
+  <div class="details-wrapper-options" style="margin-top: 40px;">
+    <button class="pay-main-button" (click)="openSendCoinsModal(wallet)">
+      {{ 'common.sendFunds' | translate }}
+    </button>
+
+    <button
+      class="create-fiat-button pay-main-button"
+      (click)="openRequestCoinsModal(wallet.address, wallet.currencyCode)">
+
+      {{ 'common.requestFunds' | translate }}
+    </button>
+  </div>
+
+  <ng-container *ngIf="isCreditCard" >
+    <div *ngIf="wallet.type === 'creditCard'" class="details-wrapper-information">
+      <h2>Top up with VISA/Master Card</h2>
+      <form [formGroup]="cardForm" (ngSubmit)="buyWithCard(wallet.address, wallet.currencyCode)" class="top-up-form" novalidate>
+        <div class="top-up-container">
+          <input
+            formControlName="amount"
+            type="number"
+            inputmode="decimal"
+            placeholder="amount"
+            class="to-up-input"/>
+          <span>{{ wallet.currencyCode }}</span>
+        </div>
+        <button [disabled]="cardForm.invalid" type="submit" class="top-up-action">Top up</button>
+      </form>
+    </div>
+  </ng-container>
+
+</ion-content> 

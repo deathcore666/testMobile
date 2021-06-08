@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button (click)="closeModal()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="no-available-container">
+    <div class="exchange-container">
+      <p class="exchange-description">
+        International currency exchange markets are currently closed.<br>
+        Please, try again during standart business hours on {{ exchangeData.availableDate }}
+      </p>
+
+      <div class="exchang-currency">
+        <div class="currency">{{ exchangeData.exchangedCurrency.name }}</div>
+        <ion-icon mode="md" name="repeat"></ion-icon>
+        <div class="currency">{{ exchangeData.receivedCurrency.name }}</div>
+      </div>
+    
+    </div>
+  </div>
+</ion-content>

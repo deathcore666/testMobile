@@ -1,0 +1,223 @@
+<ion-content padding no-bounce>
+  <div class="pay-authentication-wrapper">
+    <a class="pay-logo"></a>
+
+    <form
+      [formGroup]="signUpForm"
+      class="pay-authentication"
+      (ngSubmit)="signUp()"
+      novalidate>
+
+      <div class="pay-authentication-form">
+        <div class="form-group">
+          <ion-label position="stacked">
+            {{ 'signUp.labelEmail' | translate }}
+          </ion-label>
+  
+          <ion-input
+            [ngClass]="{
+              'is-valid': isControlStatus('email', 'valid'),
+              'is-invalid': isControlStatus('email', 'invalid')
+            }"
+            formControlName="email"
+            type="email"
+            autocomplete="off"
+            placeholder="{{ 'signUp.placeholderEmail' | translate }}">
+          </ion-input>
+          <div *ngIf="isControlStatus('email', 'invalid')" class="invalid-feedback">
+            <div
+              class="error"
+              *ngIf="signUpForm.get('email').hasError('required')">
+              Email is required
+            </div>
+            <div
+              class="error"
+              *ngIf="signUpForm.get('email').hasError('email')">
+              Invalid email
+            </div>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <ion-label position="stacked">
+            {{ 'signUp.labelPhone' | translate }}
+          </ion-label>
+  
+          <ion-input
+            [ngClass]="{
+              'is-valid': isControlStatus('phone', 'valid'),
+              'is-invalid': isControlStatus('phone', 'invalid')
+            }"
+            formControlName="phone"
+            autocomplete="off"
+            type="tel"
+            placeholder="{{ 'signUp.placeholderPhone' | translate }}">
+          </ion-input>
+          <div *ngIf="isControlStatus('phone', 'invalid')" class="invalid-feedback">
+            <div
+              class="error"
+              *ngIf="signUpForm.get('phone').hasError('required')">
+              Phone is required.
+            </div>
+            <div
+              class="error"
+              *ngIf="signUpForm.get('phone').hasError('pattern')">
+              Phone must contain number and start with "+"
+            </div>
+            <div
+              class="error"
+              *ngIf="signUpForm.get('phone').hasError('minlength')">
+              Phone should contain no less than 6 characters
+            </div>
+            <div
+              class="error"
+              *ngIf="signUpForm.get('phone').hasError('maxlength')">
+              Phone should contain no more than 21 characters
+            </div>
+            <div
+              class="error"
+              *ngIf="signUpForm.get('phone').hasError('phoneInvalid')">
+              Phone invalid
+            </div>
+          </div>
+        </div>
+
+        <p class="pay-authentication-notify">
+          {{ 'signUp.notification' | translate }}
+        </p>
+  
+        <div class="form-group">
+          <ion-label position="stacked">
+            {{ 'signUp.labelPassword' | translate }}
+          </ion-label>
+  
+          <ion-input
+            [ngClass]="{
+              'is-valid': isControlStatus('password', 'valid'),
+              'is-invalid': isControlStatus('password', 'invalid')
+            }"
+            formControlName="password"
+            type="password"
+            autocomplete="off"
+            placeholder="{{ 'signUp.placeholderPassword' | translate }}">
+          </ion-input>
+          <div *ngIf="isControlStatus('password', 'invalid')" class="invalid-feedback">
+            <div
+              class="error"
+              *ngIf="signUpForm.get('password').hasError('required')">
+              Password is required.
+            </div>
+            <div
+              class="error"
+              *ngIf="signUpForm.get('password').hasError('pattern')">
+              Your password must contain at least 1 uppercase letter, 1 lowercase letter, 1 special character(@$!%*?#&), 1 digit.
+            </div>
+            <div
+              class="error"
+              *ngIf="signUpForm.get('password').hasError('minlength')">
+              Minimum password length is 7 characters
+            </div>
+            <div
+              class="error"
+              *ngIf="signUpForm.get('password').hasError('maxlength')">
+              Maximum password length is 30 characters
+            </div>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <ion-label position="stacked">
+            {{ 'signUp.labelConfirmPassword' | translate }}
+          </ion-label>
+          <ion-input
+            [ngClass]="{
+              'is-valid': isControlStatus('confirmPassword', 'valid'),
+              'is-invalid': isControlStatus('confirmPassword', 'invalid')
+            }"
+            formControlName="confirmPassword"
+            type="password"
+            autocomplete="off"
+            placeholder="{{ 'signUp.placeholderConfirmPassword' | translate }}">
+          </ion-input>
+          <div *ngIf="isControlStatus('confirmPassword', 'invalid')" class="invalid-feedback">
+            <div
+              class="error"
+              *ngIf="signUpForm.get('confirmPassword').hasError('required')">
+              Confirm password is required
+            </div>
+            <div
+              class="error"
+              *ngIf="signUpForm.get('confirmPassword').hasError('compare')">
+              {{ 'changePassword.notification' | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <ion-label position="stacked">
+            {{ 'signUp.labelAccountType' | translate }}
+          </ion-label>
+          <ion-select
+            [interfaceOptions]="customAlertOptions"
+            [ngClass]="{
+              'is-valid': isControlStatus('accountType', 'valid'),
+              'is-invalid': isControlStatus('accountType', 'invalid')
+            }"
+            formControlName="accountType"
+            placeholder="{{ 'signUp.placeholderAccountType' | translate }}">
+
+            <ion-select-option [value]="'personal'"> 
+              {{ 'signUp.accountTypePersonal' | translate }} 
+            </ion-select-option>
+            <ion-select-option [value]="'business'"> 
+              {{ 'signUp.accountTypeBusiness' | translate }} 
+            </ion-select-option>
+          </ion-select>
+          <div *ngIf="isControlStatus('accountType', 'invalid')" class="invalid-feedback">
+            <div
+              class="error"
+              *ngIf="signUpForm.get('accountType').hasError('required')">
+              Account type is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="coupon-label">
+            {{ 'signUp.labelCoupon' | translate }}
+          </div>
+
+          <input
+            [patterns]="customPatterns"
+            [dropSpecialCharacters]="false"
+            [ngClass]="{
+              'is-valid': isControlStatus('coupon', 'valid'),
+              'is-invalid': isControlStatus('coupon', 'invalid')
+            }"
+            (keyup)="updateToUpperCase($event)"
+            formControlName="coupon"
+            mask="VV-0000"
+            style="border-bottom-color: #18a0fb"
+            class="coupon-input"
+            placeholder="Enter coupon code"
+            type="text"/>
+        </div>
+  
+        <button
+          [disabled]="signUpForm.invalid"
+          type="submit"
+          class="pay-main-button">
+  
+          {{ 'common.signUp' | translate }}
+        </button>
+      </div>
+    </form>
+
+    <footer class="pay-authentication-footer">
+      <span>
+        {{ 'signUp.haveAccount' | translate }}
+        <a [routerLink]="['/sign-in']">{{ 'common.signIn' | translate }}</a>
+      </span>
+    </footer>
+  </div>
+</ion-content>

@@ -1,0 +1,61 @@
+<ion-header>
+    <ion-toolbar no-border-bottom>
+        <button
+                [routerLink]="['/settings']"
+                class="pay-account-button">
+
+            <ion-icon name="contact"></ion-icon>
+        </button>
+
+        <ion-title>
+            {{ title | translate }}
+        </ion-title>
+
+        <button
+                [routerLink]="['/qr-scanner']"
+                class="pay-scan-button">
+            <ion-icon class="qr-scanner" name="qr-scanner"></ion-icon>
+        </button>
+    </ion-toolbar>
+
+    <ion-toolbar no-border-top class="ion-no-padding transactions-toolbar">
+        <ion-segment [(ngModel)]="transactionType">
+            <ion-segment-button [routerLink]="['outgoing']" routerLinkActive="segment-button-checked" replaceUrl="true">
+                <img height="24" *ngIf="title === 'transactions.titleOutgoing'" src="assets/images/shared/up-active.svg"
+                     alt="outgoing">
+                <img *ngIf="title !== 'transactions.titleOutgoing'" src="assets/images/shared/up.svg" alt="outgoing">
+            </ion-segment-button>
+            <ion-segment-button [routerLink]="['incoming']" routerLinkActive="segment-button-checked" replaceUrl="true">
+                <img *ngIf="title === 'transactions.titleIncoming'" src="assets/images/shared/down-active.svg"
+                     alt="outgoing">
+                <img *ngIf="title !== 'transactions.titleIncoming'" src="assets/images/shared/down.svg" alt="outgoing">
+            </ion-segment-button>
+            <ion-segment-button [routerLink]="['exchange']" routerLinkActive="segment-button-checked" replaceUrl="true">
+                <img *ngIf="title === 'transactions.titleExchanges'" src="assets/images/shared/exchange-active.svg"
+                     alt="outgoing">
+                <img *ngIf="title !== 'transactions.titleExchanges'" src="assets/images/shared/exchange.svg"
+                     alt="outgoing">
+            </ion-segment-button>
+            <ion-segment-button [routerLink]="['purchase']" routerLinkActive="segment-button-checked" replaceUrl="true">
+                <img *ngIf="title === 'transactions.titlePurchases'" src="assets/images/shared/basket-active.svg"
+                     alt="outgoing">
+                <img *ngIf="title !== 'transactions.titlePurchases'" src="assets/images/shared/basket.svg"
+                     alt="outgoing">
+            </ion-segment-button>
+            <ion-segment-button [routerLink]="['deposit']" routerLinkActive="segment-button-checked" replaceUrl="true">
+                <img *ngIf="title === 'transactions.titleDeposit'" src="assets/images/shared/wallet-active.svg"
+                     alt="wallet">
+                <img *ngIf="title !== 'transactions.titleDeposit'" src="assets/images/shared/wallet.svg" alt="wallet">
+
+            </ion-segment-button>
+            <ion-segment-button [routerLink]="['withdrawal']" routerLinkActive="segment-button-checked"
+                                replaceUrl="true">
+                <ion-icon name="card"></ion-icon>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+<div class="swipe" overflow-scroll="true" (swipe)="swipe($event)">
+    <router-outlet></router-outlet>
+</div>

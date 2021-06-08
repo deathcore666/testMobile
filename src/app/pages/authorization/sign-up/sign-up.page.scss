@@ -1,0 +1,34 @@
+.coupon-label {
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 1px;
+  font-size: 14px;
+  font-family: 'ProximaNova-Semibold';
+}
+
+.coupon-input {
+  width: 100%;
+  color: #18a0fb;
+  border: 0;
+  font-size: 20px;
+  font-family: ProximaNova-Light;
+  height: 45px;
+  border-bottom: 1px solid #18a0fb;
+  margin: 0;
+  color: white;
+  background: transparent;
+}
+
+.coupon-input::placeholder {
+  color: #18a0fb;
+  opacity: 0.4;
+}
+
+.is-valid {
+  border-bottom-color: #18a0fb !important;
+}
+
+.is-invalid {
+  border-bottom-color: #ed2350 !important;
+}
+

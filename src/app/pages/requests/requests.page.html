@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar no-border-bottom>
+    <button [routerLink]="['/settings']" class="pay-account-button">
+      <ion-icon name="contact"></ion-icon>
+    </button>
+
+    <ion-title>
+      Requests
+    </ion-title>
+
+    <button
+      [routerLink]="['/qr-scanner']"
+      class="pay-scan-button">
+      <ion-icon class="qr-scanner" name="qr-scanner"></ion-icon>
+    </button>
+  </ion-toolbar>
+  <ion-toolbar class="ion-no-padding" no-border-top>
+    <ion-segment [(ngModel)]="requestType">
+      <ion-segment-button [routerLink]="['outcome-request']" routerLinkActive="segment-button-checked" replaceUrl="true">
+        Outgoing
+      </ion-segment-button>
+      <ion-segment-button [routerLink]="['income-request']" routerLinkActive="segment-button-checked" replaceUrl="true">
+        Incoming
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<div (swipe)="swipe($event)" class="switch">
+  <router-outlet></router-outlet>
+</div>

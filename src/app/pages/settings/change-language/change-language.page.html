@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ 'changeLanguage.title' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form
+    #changeLangularForm="ngForm"
+    name="changeLangularForm"
+    class="pay-authentication"
+    novalidate
+    (ngSubmit)="changeLanguage()">
+
+    <ion-item no-padding>
+      <ion-label position="stacked">{{ 'changeLanguage.label' | translate }}</ion-label>
+      <ion-select 
+        [(ngModel)]="changedLanguage" 
+        name='languages' 
+        placeholder="{{ 'changeLanguage.label' | translate }}">
+
+        <ion-select-option
+          *ngFor="let language of languagesList"
+          [value]="language.code">
+    
+          {{ language.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <button type="submit" class="pay-main-button" [disabled]="changedLanguage === language">
+      {{ 'common.save' | translate }}
+    </button>
+  </form>
+</ion-content>

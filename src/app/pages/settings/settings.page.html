@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left top>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title> 
+      {{ 'settings.title' | translate }} 
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding no-bounce>
+  <ion-list>
+    <ion-item (click)="openActivityModal()">
+      <ion-icon name="ios-analytics" item-start></ion-icon>
+      {{ 'settings.activity' | translate }}
+      <ion-icon name="ios-arrow-forward"></ion-icon>
+    </ion-item>
+
+    <ion-item (click)="openChangeLanguageModal()" *ngIf="showItem">
+      <ion-icon name="globe" mode="md" item-start></ion-icon>
+      {{ 'settings.changeLanguage' | translate }}
+      <ion-icon name="ios-arrow-forward"></ion-icon>
+    </ion-item>
+
+    <ion-item (click)="openChangePasswordModal()">
+      <ion-icon name="ios-key" item-start></ion-icon>
+      {{ 'settings.changePassword' | translate }}
+      <ion-icon name="ios-arrow-forward"></ion-icon>
+    </ion-item>
+
+    <ion-item (click)="openTypeOfVerificationModal()">
+      <ion-icon name="md-lock" item-start></ion-icon>
+      {{ 'settings.typeOfVerification' | translate }}
+      <ion-icon name="ios-arrow-forward"></ion-icon>
+    </ion-item>
+
+    <ion-item (click)="openFingerprintModal()">
+      <ion-icon name="ios-finger-print" item-start></ion-icon>
+      {{ 'settings.fingerprint' | translate }}
+      <ion-icon name="ios-arrow-forward"></ion-icon>
+    </ion-item>
+
+    <ion-item (click)="openNotificationModal()">
+      <ion-icon name="ios-notifications" item-start></ion-icon>
+      {{ 'settings.notifications' | translate }}
+      <ion-icon name="ios-arrow-forward"></ion-icon>
+    </ion-item>
+
+    <ion-item (click)="logout()">
+      <ion-icon name="ios-log-out" item-start></ion-icon>
+      {{ 'settings.logout' | translate }}
+      <ion-icon name="ios-arrow-forward"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

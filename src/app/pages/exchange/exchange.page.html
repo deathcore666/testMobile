@@ -1,0 +1,207 @@
+
+<ion-header>
+  <ion-toolbar>
+    <button
+      [routerLink]="['/settings']"
+      class="pay-account-button">
+      
+      <ion-icon name="contact"></ion-icon>
+    </button>
+
+    <ion-title>{{ 'exchange.title' | translate }}</ion-title>
+    
+    <button
+      [routerLink]="['/qr-scanner']"
+      class="pay-scan-button">
+      <ion-icon class="qr-scanner" name="qr-scanner"></ion-icon>
+    </button>    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form
+    *ngIf="step === 1"
+    #createExchangeForm="ngForm"
+    name="createExchangeForm"
+    class="pay-authentication"
+    (ngSubmit)="next()"
+    novalidate>
+    
+    <ion-item no-padding>
+      <ion-label position="stacked">
+        {{ 'exchange.labelExchangedCurrency' | translate }}
+      </ion-label>
+      <ion-select 
+        readonly 
+        placeholder="{{ 'exchange.placeholderExchangedCurrency' | translate }}" 
+        [(ngModel)]="exchangedCurrency ? exchangedCurrency.name : exchangedCurrency"
+        [selectedText]="exchangedCurrency ? exchangedCurrency.name : exchangedCurrency"
+        required
+        (click)="openCurrenciesModal('exchangeFrom')"
+        name="exchangedCurrencyInput"
+        #exchangedCurrencyInput="ngModel">
+      </ion-select>
+    </ion-item>
+    
+    <ion-item no-padding style="margin-bottom: 60px;">
+      <ion-label position="stacked">
+        {{ 'exchange.labelExchangedAmount' | translate }}
+      </ion-label>
+
+      <ion-input
+        type="number"
+        #exchangedAmountInput
+        name="exchangedAmountInput"
+        placeholder="{{ 'exchange.placeholderExchangedAmount' | translate }}"
+        [(ngModel)]="exchangedAmount"
+        required
+        (ionChange)="amountSubscriber.next($event)">
+      </ion-input>
+    </ion-item>
+
+    <ion-item no-padding>
+      <ion-label position="stacked">
+        {{ 'exchange.labelReceivedCurrency' | translate }}
+      </ion-label>
+      <ion-select 
+        readonly 
+        placeholder="{{ 'exchange.placeholderReceivedCurrency' | translate }}" 
+        [(ngModel)]="receivedCurrency ? receivedCurrency.name : receivedCurrency"
+        [selectedText]="receivedCurrency ? receivedCurrency.name : receivedCurrency"
+        required
+        (click)="openCurrenciesModal('exchangeTo')"
+        name="receivedCurrencyInput"
+        #receivedCurrencyInput="ngModel">
+      </ion-select>
+    </ion-item>
+    <ion-item no-padding>
+      <ion-label position="stacked">
+        {{ 'exchange.labelReceivedAmount' | translate }}
+      </ion-label>
+      <ion-input
+        type="number"
+        #receivedAmountInput
+        name="receivedAmountInput"
+        placeholder="{{ 'exchange.placeholderReceivedAmount' | translate }}"
+        [(ngModel)]="receivedAmount"
+        required
+        readonly>
+      </ion-input>
+    </ion-item>
+    <button
+      type="submit"
+      [disabled]="!exchangedCurrency || !exchangedAmount > 0 || !receivedCurrency || !receivedAmount"
+      class="pay-main-button">
+      {{ 'common.next' | translate }}
+    </button>
+  </form>
+
+  <div *ngIf="step === 2">
+    <ion-item no-padding *ngIf="exchangedWallet">
+      <ion-label position="stacked">
+        {{ 'exchange.labelExchangeAccount' | translate }}
+      </ion-label>
+      <ion-select 
+        [(ngModel)]="exchangedWallet" 
+        name='exchangeWallet' 
+        selectedText="{{exchangedWallet.name}} ({{exchangedWallet.balance}})"
+        placeholder="{{ 'exchange.placeholderExchangeAccount' | translate }}"
+        required>
+
+        <ion-select-option
+          *ngFor="let wallet of exchangedWalletList"
+          [value]="wallet">
+
+          {{ wallet.name }} <b>({{ wallet.balance }})</b>
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="receivedWallet" no-padding style="margin-bottom: 60px;">
+      <ion-label position="stacked">
+        {{ 'exchange.labelReceivedAccount' | translate }}
+      </ion-label>
+      <ion-select 
+        [(ngModel)]="receivedWallet"
+        name='receiveWalletAddress' 
+        placeholder="{{ 'exchange.placeholderReceivedAccount' | translate }}"
+        selectedText="{{receivedWallet.name}} ({{receivedWallet.balance}})"
+        required>
+
+        <ion-select-option
+          *ngFor="let wallet of receivedWalletList"
+          [value]="wallet">
+
+          {{ wallet.name }} <b>({{ wallet.balance }})</b>
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding>
+      <ion-label position="stacked">
+        {{ 'exchange.labelConfirmExchangedAmount' | translate }}
+      </ion-label>
+
+      <ion-input
+        type="number"
+        #exchangedAmountInput
+        name="exchangedAmountInput"
+        [(ngModel)]="exchangedAmount"
+        readonly>
+      </ion-input>
+    </ion-item>
+
+    <ion-item no-padding>
+      <ion-label position="stacked">
+        {{ 'exchange.placeholderConfirmExchangedAmount' | translate }}
+      </ion-label>
+
+      <ion-input
+        type="number"
+        #receivedAmountInput
+        name="receivedAmountInput"
+        [(ngModel)]="receivedAmount"
+        readonly>
+      </ion-input>
+    </ion-item>
+
+    <p *ngIf="showMessage" class="wallet-not-fount">
+      <b *ngIf="receivedCurrency">{{ missedWalletName }}</b> 
+      {{ 'exchange.missedAccount' | translate }}
+    </p>
+    
+    <div class="exchange-navigation">
+      <button class="pay-main-button" (click)="previous()">
+        {{ 'common.back' | translate }}
+      </button>
+      
+      <button class="pay-main-button" (click)="next()">
+        {{ 'common.next' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="showExchangeResult && step === 3" class="exchange-result-wrapper">
+
+    <div class="successfull-wrapper" *ngIf="successExchange">
+      <ion-icon name="checkmark-circle"></ion-icon>
+      <h1 class="successfull-wrapper-title">
+        {{ 'exchange.success' | translate }}
+      </h1>
+      <button class="pay-main-button" (click)="reset()">
+        {{ 'common.ok' | translate }}
+      </button>
+    </div>
+
+    <div class="cancel-wrapper" *ngIf="!successExchange">
+      <ion-icon name="close-circle"></ion-icon>
+      <h1 class="cancel-wrapper-title">
+        {{ 'exchange.cancel' | translate }}
+      </h1>
+
+      <button class="pay-main-button" (click)="reset()">
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </div>
+  </div>
+</ion-content>

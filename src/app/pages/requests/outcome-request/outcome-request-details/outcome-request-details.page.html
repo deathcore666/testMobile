@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button (click)="closeModal()" ion-button icon-only>
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ 'outcomeRequestDetails.title' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="outcomeRequest">
+    <div class="details-wrapper-information">
+      <h2>
+        {{ 'outcomeRequestDetails.sender' | translate }}
+      </h2>
+      <p>
+        {{ outcomeRequest.sender }}
+      </p>
+    </div>
+
+    <div class="details-wrapper-information">
+      <h2>
+        {{ 'outcomeRequestDetails.recipient' | translate }}
+      </h2>
+      <p>
+        {{ outcomeRequest.recipient }}
+      </p>
+    </div>
+
+    <div class="details-wrapper-information">
+      <h2>
+        {{ 'outcomeRequestDetails.amount' | translate }}
+      </h2>
+      <p>
+        {{ outcomeRequest.amount }} {{ outcomeRequest.currencyName }}
+      </p>
+    </div>
+
+    <div class="details-wrapper-information">
+      <h2> {{ 'outcomeRequestDetails.toAddress' | translate }} </h2>
+      <p class="details-wrapper-wallet-address">
+        <span>{{ outcomeRequest.address }}</span>
+        <ion-icon
+          class="copy-icon"
+          name="ios-copy"
+          (click)="successCopy(outcomeRequest.address)">
+        </ion-icon>
+      </p> 
+    </div>
+    
+    <div class="details-wrapper-information">
+      <h2>
+        {{ 'outcomeRequestDetails.createdAt' | translate }}
+      </h2>
+      <p>
+        {{ outcomeRequest.createdAt | date: 'MMM d, y - H:mm:ss' }}
+      </p>
+    </div>
+
+    <div *ngIf="outcomeRequest.notes" class="details-wrapper-information">
+      <h2>
+        {{ 'outcomeRequestDetails.notes' | translate }}
+      </h2>
+      <p>
+        {{ outcomeRequest.notes }}
+      </p>
+    </div>
+  </div>
+</ion-content>

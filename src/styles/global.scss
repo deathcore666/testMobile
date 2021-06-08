@@ -1,0 +1,283 @@
+@import "~@ionic/angular/css/core.css";
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+@import "./themes/coinexodeepp.theme.scss";
+
+* {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.sc-ion-segment-md-s > ion-segment-button {
+  min-width: 0px;
+  opacity: 1;
+}
+
+.custom-page {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  justify-content: space-between;
+  contain: layout size style;
+  overflow: hidden;
+  z-index: 0;
+}
+
+ion-app {
+
+  > * {
+    &:nth-child(2) {
+      @extend .custom-page;
+    }
+  }
+}
+
+html[mode="ios"] {
+  .custom-header {
+    height: 20px;
+    overflow: hidden;
+  }
+
+  .alert-message {
+    padding: 0 !important;
+  }
+
+  ion-list {
+    margin-bottom: 0 !important;
+  }
+
+  ion-card {
+    z-index: 1;
+  }
+
+  .swipe {
+  }
+
+  .searchbar-modal-wrapper {
+    height: auto;
+  }
+
+  app-searchbar-modal ion-content {
+    --keyboard-offset: 0px !important;
+  }
+
+  app-ecosystem-transaction ~ ion-alert, app-request-coins ~ ion-alert {
+    .alert-wrapper .alert-radio-label,
+    .picker-wrapper .alert-radio-label {
+      padding-left: 60px !important;
+    }
+
+    .coinvaders, .coinexo, .nikotech, .bitcoinChange, .cellcom {
+      position: absolute !important;
+      left: 20px !important;
+    }
+  }
+
+  .coinexo-theme {
+
+    .sc-ion-segment-ios-h {
+      --background-checked: #00a9c9;
+      --border-color-checked: #00a9c9;
+      --color: #000;
+    }
+
+    .segment-button-checked {
+      color: #ffffff;
+
+      ion-icon {
+        color: #ffffff;
+      }
+    }
+
+    .ion-page {
+      background-color: #fff !important;
+    }
+
+    ion-title {
+      padding-top: 0;
+    }
+  }
+
+  .coinexodeepp-theme {
+
+    .sc-ion-segment-ios-h{
+      --color: #fff;
+      --color-checked: #fff;
+      --background-checked: #18a0fb;
+      --border-color: #18a0fb;
+    }
+
+    .segment-button-checked {
+      color: #fff;
+      --color-selected: #fff;
+
+      ion-icon {
+        color: #fff;
+      }
+
+      ion-label {
+        color: #fff;
+      }
+    }
+
+    .ion-page {
+      background-color: #001d31 !important;
+    }
+
+    .pay-main-button, .pay-cancel-button {
+      font-size: 16px;
+    }
+  }
+
+  .coinvaders-theme {
+    .sc-ion-segment-ios-h {
+      --color: #000;
+      --color-checked: #000;
+      --background-checked: #21cd99;
+      --border-color: #21cd99;
+    }
+
+    .segment-button-checked {
+      color: #000;
+
+      ion-icon {
+        color: #000;
+      }
+    }
+
+    .ion-page {
+      background-color: #fff !important;
+    }
+  }
+
+  .bitcoinchange-theme {
+    .sc-ion-segment-ios-h {
+      --background-checked: #f9b815;
+      --border-color-checked: #f9b815;
+      --color: #000;
+    }
+
+    .segment-button-checked {
+      color: #000;
+
+      ion-icon {
+        color: #000;
+      }
+    }
+
+    .ion-page {
+      background-color: #fff !important;
+    }
+  }
+
+  ion-title {
+    font-size: 18px;
+    padding-top: 5px;
+  }
+
+  .header-ios ion-toolbar:last-child {
+    --border-width: 0;
+  }
+
+  ion-toolbar {
+    --border-width: 0;
+
+    ion-buttons {
+      top: 3px;
+      left: 5px;
+    }
+  }
+
+  app-settings ion-list .item ion-icon:last-child {
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
+  }
+
+  app-transactions {
+
+    ion-toolbar[no-padding] {
+      padding: 10px;
+    }
+  }
+}
+
+html[mode="md"] {
+
+  .pay-scan-button,
+  .pay-account-button,
+  .pay-request-button {
+    top: 7px;
+  }
+}
+
+app-ecosystem-transaction ~ ion-alert, app-request-coins ~ ion-alert {
+  .alert-radio-icon {
+    position: relative;
+    border-radius: 0 !important;
+    border: none !important;
+    height: 30px !important;
+    width: 30px !important;
+    background-size: 30px 30px !important;
+    background-repeat: no-repeat ;
+
+    .alert-radio-inner {
+      position: absolute;
+      right: -200px;
+      left: auto !important;
+      top: 9px !important;
+    }
+  }
+
+  .coinexo {
+    background-image: url('../assets/images/whitelabel-icons/coinexo.png') !important;
+  }
+}
+
+.alert-wrapper {
+  min-width: 280px !important;
+}
+
+svg {
+  width: 100%;
+}
+
+.pay-authentication-form {
+
+  .pay-form-wrapper-title {
+    h2 {
+      text-align: center;
+    }
+  }
+  .pay-main-button {
+    margin-bottom: 0 !important;
+  }
+}
+
+.item-checkbox-checked {
+
+  ion-label {
+    font-size: 20px !important;
+    padding: 25px 0 !important;
+    transition: all 1s ease-in-out !important;
+  }
+}
+
+ion-modal ~ ion-alert {
+  display: none !important;
+}

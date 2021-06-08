@@ -1,0 +1,15 @@
+<ion-content padding no-bounce>
+  <div class="successfull-wrapper">
+    <ion-icon name="checkmark-circle"></ion-icon>
+    <h1 class="successfull-wrapper-title">{{ 'successPurchase.notification' | translate }}</h1>
+    <button
+      ion-button
+      full
+      class="pay-main-button"
+      [routerLink]="['/wallets']"
+      replaceUrl="true">
+
+      {{ 'common.ok' | translate }}
+    </button>
+  </div>
+</ion-content>

@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    
+    <ion-title *ngIf='wallet'> 
+      <span (click)="openRenameWalletModal()">{{ wallet.name }}</span>
+    </ion-title>
+
+    <button
+      [routerLink]="['/qr-scanner']"
+      class="pay-scan-button">
+      <ion-icon class="qr-scanner" name="qr-scanner"></ion-icon>
+    </button>   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngIf='wallet'>
+  <ion-refresher (ionRefresh)="refresh($event)" slot="fixed">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      refreshingSpinner="dots">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div class="details-wrapper">
+    <div class="details-wrapper-options">
+      <span class="details-wrapper-options-balance">
+        <h2>{{ 'walletDetails.walletBalance' | translate }}</h2>
+        <p>{{ wallet.balance }} {{ wallet.currencyCode }}</p>
+        <img *ngIf="wallet.currencyName" src="assets/images/coin-icons/details/{{wallet.currencyName}}.svg" />
+      </span>
+      <span class="details-wrapper-options-qr-code">
+        <div 
+          *ngIf="accountQrCode" 
+          [style.background-image]="accountQrCode" 
+          class="account-qr-image"></div>
+      </span>
+    </div>
+  </div>
+
+  <div class="details-wrapper-information">
+    <h2>{{ 'walletDetails.walletNumber' | translate }}</h2>
+    <div class="details-wrapper-wallet-address">
+      <span>{{ wallet.address }}</span>
+      <!-- <ion-icon
+        class="copy-icon"
+        name="ios-copy"
+        (click)="successCopy(wallet.address)">
+      </ion-icon> -->
+      <div class="copy-icon"><img src="assets/images/shared/copy_icon.svg" (click)="successCopy(wallet.address)" ></div>
+    </div>
+  </div>
+
+  <div class="details-wrapper-information">
+    <h2>{{ 'walletDetails.walletCreatedAt' | translate }}</h2>
+    <p>{{ wallet.createdAt | date: 'MMM d, y - H:mm:ss' }}</p>
+  </div>
+  
+  <div class="details-wrapper-options" style="margin-top: 40px;">
+    <button class="pay-main-button" (click)="openSendCoinsModal(wallet)">
+      {{ 'common.sendFunds' | translate }}
+    </button>
+
+    <button
+      class="request-funds-button pay-main-button"
+      (click)="openRequestCoinsModal(wallet.address, wallet.currencyCode)">
+
+      {{ 'common.requestFunds' | translate }}
+    </button>
+  </div>
+
+  <button class="view-transactions-list-button pay-main-button" (click)="openTransactions()">
+    View transactions list
+  </button>
+</ion-content> 

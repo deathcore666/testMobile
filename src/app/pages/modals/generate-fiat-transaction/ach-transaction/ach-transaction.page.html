@@ -1,0 +1,206 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ 'achFedwireTransaction.titleAch' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ng-container *ngIf="accountType === 'personal'; else businessType">
+    <form
+      [formGroup]="personalForm"
+      class="pay-authentication"
+      (ngSubmit)="createAchTransaction()"
+      novalidate>
+
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'achFedwireTransaction.labelAccountNumber' | translate }}
+        </ion-label>
+        <ion-input
+          formControlName="accountNumber"
+          type="text"
+          placeholder="{{ 'achFedwireTransaction.placeholderAccountNumber' | translate }}">
+        </ion-input>
+      </div>
+
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'achFedwireTransaction.labelAddress' | translate }}
+        </ion-label>
+        <ion-input
+          formControlName="accountAdress"
+          type="text"
+          placeholder="{{ 'achFedwireTransaction.placeholderAddress' | translate }}">
+        </ion-input>
+      </div>
+
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'achFedwireTransaction.labelCity' | translate }}
+        </ion-label>
+        <ion-input
+          formControlName="accountCity"
+          type="text"
+          placeholder="{{ 'achFedwireTransaction.placeholderCity' | translate }}">
+        </ion-input>
+      </div>
+
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'achFedwireTransaction.labelState' | translate }}
+        </ion-label>
+        <ion-select
+          (click)="openModal(stateList.US)"
+          formControlName="accountState"
+          [selectedText]="choosenItemFromModal"
+          type="text"
+          placeholder="{{ 'achFedwireTransaction.placeholderState' | translate }}"
+          readonly>
+        </ion-select>
+      </div>
+
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'achFedwireTransaction.labelPostcode' | translate }}
+        </ion-label>
+        <ion-input
+          formControlName="accountPostalCode"
+          type="text"
+          placeholder="{{ 'achFedwireTransaction.placeholderPostcode' | translate}}">
+        </ion-input>
+      </div>
+
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'achFedwireTransaction.labelAchRoutingCode' | translate }}
+        </ion-label>
+        <ion-input
+          formControlName="accountRoutingCode"
+          type="text"
+          placeholder="{{ 'achFedwireTransaction.placeholderAchRoutingCode' | translate }}">
+        </ion-input>
+      </div>
+
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'achFedwireTransaction.labelNotes' | translate }}
+        </ion-label>
+        <ion-input
+          formControlName="notes"
+          type="text"
+          placeholder="{{ 'achFedwireTransaction.placeholderNotes' | translate }}">
+        </ion-input>
+      </div>
+
+      <button
+        [disabled]="personalForm.invalid"
+        type="submit"
+        class="pay-main-button">
+  
+        {{ 'common.send' | translate }}
+      </button>
+    </form>
+  </ng-container>
+
+  <ng-template #businessType>
+    <form
+      [formGroup]="businessFrom"
+      class="pay-authentication"
+      (ngSubmit)="createAchTransaction()"
+      novalidate>
+
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'achFedwireTransaction.labelAccountNumber' | translate }}
+        </ion-label>
+        <ion-input
+          formControlName="accountNumber"
+          type="text"
+          placeholder="{{ 'achFedwireTransaction.placeholderAccountNumber' | translate }}">
+        </ion-input>
+      </div>
+
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'achFedwireTransaction.labelCompanyName' | translate }}
+        </ion-label>
+        <ion-input
+          formControlName="companyName"
+          type="text"
+          placeholder="{{ 'achFedwireTransaction.placeholderCompanyName' | translate }}">
+        </ion-input>
+      </div>
+
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'achFedwireTransaction.labelBeneficiaryCountry' | translate}}
+        </ion-label>
+        <ion-select
+          (click)="openModal(countryList)"
+          formControlName="createdCountry"
+          [selectedText]="choosenItemFromModal"
+          type="text"
+          placeholder="{{ 'achFedwireTransaction.placeholderBeneficiaryCountry' | translate }}">
+        </ion-select>
+      </div>
+
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'achFedwireTransaction.labelCity' | translate }}
+        </ion-label>
+        <ion-input
+          formControlName="accountCity"
+          type="text"
+          placeholder="{{ 'achFedwireTransaction.placeholderCity' | translate }}">
+        </ion-input>
+      </div>
+
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'achFedwireTransaction.labelBeneficiaryAddress' | translate }}
+        </ion-label>
+        <ion-input
+          formControlName="accountAdress"
+          type="text"
+          placeholder="{{ 'achFedwireTransaction.placeholderBeneficiaryAddress' | translate }}">
+        </ion-input>
+      </div>
+
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'achFedwireTransaction.labelAchRoutingCode' | translate }}
+        </ion-label>
+        <ion-input
+          formControlName="accountRoutingCode"
+          type="text"
+          placeholder="{{ 'achFedwireTransaction.placeholderAchRoutingCode' | translate }}">
+        </ion-input>
+      </div>
+
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'achFedwireTransaction.labelNotes' | translate }}
+        </ion-label>
+        <ion-input
+          formControlName="notes"
+          type="text"
+          placeholder="{{ 'achFedwireTransaction.placeholderNotes' | translate }}">
+        </ion-input>
+      </div>
+
+      <button
+        [disabled]="businessFrom.invalid"
+        type="submit"
+        class="pay-main-button">
+  
+        {{ 'common.send' | translate }}
+      </button>
+    </form>
+  </ng-template>
+  
+</ion-content>

@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button (click)="closeModal()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title> Transactions </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container>
+    <ion-segment>
+      <ion-segment-button (click)="filterAllTransactions('outgoing')" [checked]="transactionType === 'outgoing'"
+        layout="icon-start">
+        <img *ngIf="transactionType === 'outgoing'" src="assets/images/shared/up-active.svg" alt="outgoing">
+        <img *ngIf="transactionType !== 'outgoing'" src="assets/images/shared/up.svg" alt="outgoing">
+      </ion-segment-button>
+      <ion-segment-button (click)="filterAllTransactions('incoming')" [checked]="transactionType === 'incoming'"
+        layout="icon-start">
+        <img *ngIf="transactionType === 'incoming'" src="assets/images/shared/down-active.svg" alt="outgoing">
+        <img *ngIf="transactionType !== 'incoming'" src="assets/images/shared/down.svg" alt="outgoing">
+      </ion-segment-button>
+      <ion-segment-button (click)="filterAllTransactions('exchange')" [checked]="transactionType === 'exchange'"
+        layout="icon-start">
+        <img *ngIf="transactionType === 'exchange'" src="assets/images/shared/exchange-active.svg" alt="outgoing">
+        <img *ngIf="transactionType !== 'exchange'" src="assets/images/shared/exchange.svg" alt="outgoing">
+      </ion-segment-button>
+      <ion-segment-button (click)="filterAllTransactions('purchase')" [checked]="transactionType === 'purchase'"
+        layout="icon-start">
+        <img *ngIf="transactionType === 'purchase'" src="assets/images/shared/basket-active.svg" alt="outgoing">
+        <img *ngIf="transactionType !== 'purchase'" src="assets/images/shared/basket.svg" alt="outgoing">
+      </ion-segment-button>
+    </ion-segment>
+
+    <ng-container *ngIf="filteredTransactions">
+      <ion-card *ngFor="let transaction of filteredTransactions">
+        <ion-card-content class="pay-card-content-wrapper">
+          <svg-icon [ngClass]="currencyNameStyle(transaction.currencyName)"
+            src="./assets/images/coin-icons/{{transaction.currencyCode}}.svg"></svg-icon>
+          <div class="pay-card-content-wrapper-description">
+            <span class="wallet-currency-name" [ngClass]="currencyNameStyle(transaction.currencyName)">
+              {{ transaction.amount }} {{ transaction.currencyCode }}
+            </span>
+            <div class="wallet-name">
+              {{ transaction.createdAt | date: "MMM d, y - H:mm:ss" }}
+              <span *ngIf="transaction.status" [ngClass]="transaction.status">
+                {{ transaction.status }}
+              </span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+
+    <app-not-found *ngIf="transactionType === 'outgoing' && !filteredTransactions.length"
+      [message]="message?.outgoingTransactionsMessage" [title]="title.outgoingTransactionsTitle">
+    </app-not-found>
+
+    <app-not-found *ngIf="transactionType === 'incoming' && !filteredTransactions.length"
+      [message]="message?.incomingTransactionsMessage" [title]="title.incomingTransactionsTitle">
+    </app-not-found>
+  </ng-container>
+</ion-content>

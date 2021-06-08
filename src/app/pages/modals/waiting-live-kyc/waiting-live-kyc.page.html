@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      {{ 'waitingKyc.title' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding no-bounce>
+  <div class="cancel-wrapper">
+    <img src="./assets/images/shared/hp-feature-icon-kyc.png" />
+    
+    <h1 class="cancel-wrapper-title">
+      {{ 'waitingKyc.notification' | translate }}
+    </h1>
+
+    <button class="pay-main-button" [routerLink]="['/wallets']">
+      {{ 'common.ok' | translate }}
+    </button>
+  </div>
+</ion-content>
+

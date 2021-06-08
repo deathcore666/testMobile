@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ 'ecosystemTransaction.title' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form
+    *ngIf="choosenWallet || userWallets"
+    #createEcosystemTransaction="ngForm"
+    name="createEcosystemTransaction"
+    class="pay-authentication"
+    (ngSubmit)="createTransaction()"
+    novalidate>
+
+    <ion-item no-padding>
+      <ion-label position="stacked">
+        {{ 'ecosystemTransaction.labelRecipientAccount' | translate }}
+      </ion-label>
+      <ion-select 
+        [(ngModel)]="choosenWallet" 
+        (click)="openSelect('receiver')"
+        name='wallets'
+        placeholder="{{ 'ecosystemTransaction.labelRecipientAccount' | translate }}">
+
+        <ion-select-option
+          *ngFor="let account of data.recipientAccounts"
+          [class]="account.ecosystem"
+          [value]="account">
+
+          {{ account.walletAddress }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding *ngIf="isFromRequest">
+      <ion-label position="stacked">
+        {{ 'ecosystemTransaction.labelYourAccount' | translate }}
+      </ion-label>
+      <ion-select 
+        [(ngModel)]="data.address" 
+        name='userWallets' 
+        required
+        (click)="openSelect('sender')" 
+        placeholder="{{ 'ecosystemTransaction.labelYourAccount' | translate }}">
+
+        <ion-select-option
+          *ngFor="let account of userWallets"
+          [value]="account.address">
+
+          {{ account.walletAddress }} ({{ account.balance}} {{ data.currencyCode }})
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding *ngIf="choosenWallet">
+      <ion-label position="stacked">
+        {{ 'ecosystemTransaction.labelRecepient' | translate }}
+      </ion-label>
+      <ion-input 
+        name="recipientNameInput"
+        #recipientNameInput="ngModel"
+        type="text"
+        required
+        [(ngModel)]="choosenWallet.recipient">
+      </ion-input>
+    </ion-item>
+
+    <div class="amount-input-container">
+      <ion-item no-padding>
+        <ion-label position="stacked">
+          {{ 'ecosystemTransaction.labelAmount' | translate }}
+        </ion-label>
+        <ion-input
+          #amountInput
+          name="amountInput"
+          type="number"
+          min="1"
+          [(ngModel)]="data.amount"
+          placeholder="{{ 'ecosystemTransaction.placeholderAmount' | translate }}"
+          required></ion-input>
+      </ion-item>
+      <button
+        [disabled]="!choosenWallet"
+        (click)="getMaximumCryptoAmount()"
+        type="button"
+        class="available-container">
+        <ion-icon src="./assets/images/themes/coinexodeepp/max-amout.svg"></ion-icon>
+      </button>
+    </div>
+
+    <ion-item no-padding>
+      <ion-label position="stacked">
+        {{ 'ecosystemTransaction.labelNotes' | translate }}
+      </ion-label>
+      <ion-input
+        #notesInput
+        name="notesInput"
+        type="text"
+        minLength="0"
+        placeholder="{{ 'ecosystemTransaction.placeholderNotes' | translate }}"
+        [(ngModel)]="notes"></ion-input>
+    </ion-item>
+
+    <button
+      [disabled]="data.amount < 1 || !createEcosystemTransaction.valid"
+      type="submit"
+      class="pay-main-button ">
+      
+      {{ 'common.send' | translate }}
+    </button>
+  </form>
+</ion-content>
+  

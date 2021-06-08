@@ -1,0 +1,14 @@
+<div class="push-notify-container">
+  <div class="push-notify-content">
+    <div class="push-notify-title">{{ title }}</div>
+    <div class="push-notify-message">{{ message }}</div>
+  </div>
+  <div class="push-notify-action">
+    <ng-container *ngIf="action; else closeButton">
+      <ion-icon (click)="handlePushAction(action)" mode="ios" name="arrow-dropright"></ion-icon>
+    </ng-container>
+    <ng-template #closeButton>
+      <ion-icon (click)="closeModal()" mode="ios" name="close-circle"></ion-icon>
+    </ng-template>
+  </div>
+</div>

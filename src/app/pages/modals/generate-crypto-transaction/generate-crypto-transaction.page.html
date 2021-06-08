@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ 'smartSendFunds.title' | translate }}</ion-title>
+
+    <button
+      [routerLink]="['/qr-scanner']"
+      class="pay-scan-button">
+      <ion-icon class="qr-scanner" name="qr-scanner"></ion-icon>
+    </button>   
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form
+    [formGroup]="cryptoForm"
+    name="sendCoinsForm"
+    class="pay-authentication"
+    (ngSubmit)="send()"
+    novalidate>
+
+    <div class="form-group">
+      <ion-label position="stacked">
+        {{ 'smartSendFunds.toAddress' | translate }}
+      </ion-label>
+      <ion-input
+        [ngClass]="{
+          'is-valid': isControlStatus('toAddress', 'valid'),
+          'is-invalid': isControlStatus('toAddress', 'invalid')
+        }"
+        formControlName="toAddress"
+        name="toAddressInput"
+        type="text"
+        placeholder="{{ 'smartSendFunds.placeholderToAddress' | translate }}">
+      </ion-input>
+      <div *ngIf="isControlStatus('toAddress', 'invalid')" class="invalid-feedback">
+        <div
+          class="error"
+          *ngIf="cryptoForm.get('toAddress').hasError('required')">
+          To address is required
+        </div>
+        <div
+          class="error"
+          *ngIf="cryptoForm.get('toAddress').hasError('pattern')">
+          Invalid address
+        </div>
+      </div>
+    </div>
+
+    <div class="amount-input-container">
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'smartSendFunds.labelAmount' | translate }}
+        </ion-label>
+        <ion-input
+          [ngClass]="{
+            'is-valid': isControlStatus('amount', 'valid'),
+            'is-invalid': isControlStatus('amount', 'invalid')
+          }"
+          formControlName="amount"
+          name="amountInput"
+          maxlength="12"
+          inputmode='decimal'
+          type="text"
+          placeholder="{{ 'smartSendFunds.placeholderAmount' | translate }}">
+        </ion-input>
+        <div *ngIf="isControlStatus('amount', 'invalid')" class="invalid-feedback">
+          <div
+            class="error"
+            *ngIf="cryptoForm.get('amount').hasError('required')">
+            Amount is required
+          </div>
+          <div
+            class="error"
+            *ngIf="cryptoForm.get('amount').hasError('min')">
+            Minimum amount is 0.000001
+          </div>
+          <div
+            class="error"
+            *ngIf="cryptoForm.get('amount').hasError('pattern')">
+            Invalid amount
+          </div>
+        </div>
+      </div>
+      <button
+        [disabled]="cryptoForm.get('toAddress').invalid"
+        (click)="getMaximumCryptoAmount()"
+        type="button"
+        class="available-container">
+        <ion-icon src="./assets/images/themes/coinexodeepp/max-amout.svg"></ion-icon>
+      </button>
+    </div>
+
+    <div class="form-group">
+      <ion-label position="stacked">
+        {{ 'smartSendFunds.labelNotes' | translate }}
+      </ion-label>
+      <ion-input
+        formControlName="notes"
+        name="notesInput"
+        type="text"
+        placeholder="{{ 'smartSendFunds.placeholderNotes' | translate }}">
+      </ion-input>
+    </div>
+    
+    <button
+      [disabled]="cryptoForm.invalid"
+      type="submit"
+      class="pay-main-button">
+      
+      {{ 'common.send' | translate }}
+    </button>
+  </form>
+</ion-content>

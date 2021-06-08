@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button (click)="navCtrl.back()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Selfie</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <p>
+    Upload an existing photo where you hold an ID card facing the camera 
+    or take a new selfie to confirm your identity and enable fund withdrawal function. 
+    You can <b> skip </b> this procedure and upload the photo later.
+  </p>
+
+  <ion-item no-padding>
+    <ion-label id="custom-click">
+      <h4 (click)="presentActionSheet()" style="display:flex; justify-content: space-between;">
+        <span class="spinner-wrapper">
+          {{ 'documents.attach' | translate }}
+          <ion-spinner *ngIf="showLoading" name="crescent"></ion-spinner>
+        </span>
+        <ion-icon name="attach" style="font-size: 24px;"></ion-icon>
+      </h4>
+
+      <h4 *ngFor="let uploadedFile of savedUploadedFiles" style="text-transform: uppercase;">
+        {{ uploadedFile.name ? uploadedFile.name : 'image' }}
+        <button
+          type="button"
+          class="delete-upload-file"
+          (click)="removeUploadedFile(uploadedFile, savedUploadedFiles)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </h4>
+    </ion-label>
+  </ion-item>
+
+  <div class="uploader-footer-buttons">
+    <button type="button" class="pay-main-button" (click)="sendSelfie()">
+      Upload Selfie
+    </button>
+  </div>
+</ion-content>

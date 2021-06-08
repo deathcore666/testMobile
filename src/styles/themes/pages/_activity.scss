@@ -1,0 +1,23 @@
+app-activity {
+
+  ion-list {
+
+    ion-item {
+      margin-bottom: 20px;
+
+      .label {
+        overflow: unset;
+      }
+
+      ion-label {
+        width: 100%;
+        font-weight: normal;
+        font-size: 14px;
+      }
+    }
+   
+    .item-native {
+      flex-direction: column;
+    }
+  }
+}

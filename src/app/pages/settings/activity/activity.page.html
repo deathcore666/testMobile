@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title> {{ 'activity.title' | translate }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="refresh($event)" slot="fixed">
+    <ion-refresher-content 
+      pullingIcon="arrow-dropdown"
+      refreshingSpinner="dots">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="activityList">
+    <ion-item *ngFor="let activity of activityList" no-padding>
+      <ion-label>
+        <h3>{{ 'activity.ip' | translate }}: {{ activity.ip }}</h3>
+        <h3>{{ 'activity.country' | translate }}: {{ activity.location.country }}</h3>
+        <h3>{{ 'activity.city' | translate }}: {{ activity.location.city }}</h3>
+        <h3>{{ 'activity.status' | translate }}: {{ activity.status }}</h3>
+        <h3>{{ 'activity.date' | translate }}: {{ activity.createdAt | date: 'MMM d, y - H:mm:ss' }}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

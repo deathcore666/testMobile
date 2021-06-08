@@ -1,0 +1,1397 @@
+@import './shared/fonts';
+
+$dangerColor : #ed2350;
+$blackColor: #000000;
+$whiteColor: #ffffff;
+$secondaryColor: #fff;
+$active: #F8A423;
+$notActive: #000000;
+$greenColor: #F57C00;
+$mainColor: #0119EE;
+$fabButtonColor: #F8A423;
+$backgroundColor: #FFFFFF;
+$blueColor: #006ebc;
+$blueSecondaryColor: #18a0fb;
+$skyColor: #18a0fb;
+$sky2Color: #9fd6ff;
+$headerBackgroundColor: #0119EE;
+$greyColor: #BBC2CB;
+$headerHeight: 80px;
+$greyLabelColor: #3B5166;
+$borderBottomInput: #D9E1EA;
+$orangeColor: #FF550C;
+
+$semiBoldFont: 'ProximaNova-Semibold';
+$regularFont: 'ProximaNova-Regular';
+$lightFont: 'ProximaNova-Light';
+
+.coinexodeepp-theme {
+  --ion-font-family: 'ProximaNova-Regular';
+  background: $backgroundColor;
+  z-index: 1;
+  color: $whiteColor;
+
+  @import './shared/_shared';
+  @import './pages/pages.scss';
+
+  p {
+    color: #ffffff;
+  }
+
+  ion-toolbar {
+    display: flex;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    text-align: center;
+    background-color: $headerBackgroundColor;
+    height: $headerHeight;
+
+    ion-title {
+      color: $whiteColor;
+      padding: 0 55px;
+      font-family: $semiBoldFont;
+      text-transform: uppercase;
+      font-size: 18px;
+    }
+
+    ion-buttons {
+      position: absolute;
+      top: 18px;
+
+      button {
+        color: $blueColor;
+        left: 15px;
+        top: 0;
+        background-color: transparent;
+
+        ion-icon {
+          font-size: 40px;
+        }
+      }
+    }
+
+    &-title {
+      font-size: 20px;
+      color: $whiteColor;
+      padding-right: 0;
+      padding-left: 0;
+      margin-bottom: 0;
+
+      ion-icon {
+        color: $blueColor;
+      }
+    }
+
+    &-background {
+      border: none;
+      background-color: transparent;
+    }
+  }
+
+  .loading-wrapper {
+    background: rgba(0, 0, 0, 0.5);
+
+    ion-spinner {
+      color: #fff;
+    }
+  }
+
+  .operations-not-found {
+    svg {
+      display: none;
+    }
+  }
+
+  .alert-wrapper,
+  .picker-wrapper {
+    background: rgba(0, 29, 49, 0.95);
+    --ion-background-color: rgba(0, 29, 49, 0.95);
+
+    .picker-opt {
+      color: #ffffff;
+
+      &-selected {
+        color: #fff;
+      }
+    }
+
+    .alert-radio-label {
+      --ion-text-color-step-150: #fff;
+      color: #ffffff !important;
+      padding-left: 40px;
+      text-transform: capitalize;
+    }
+
+    .alert-title {
+      color: #ffffff;
+    }
+
+    .alert-message {
+      padding-bottom: 0 !important;
+      color: #ffffff;
+
+      p {
+        color: #ffffff;
+      }
+    }
+
+    .alert-button-group {
+      justify-content: center;
+
+      button {
+        font-family: $semiBoldFont;
+
+        &:first-child {
+          color: #ffffff;
+        }
+      }
+    }
+
+    button {
+      --ion-color-primary: #fff;
+    }
+
+    button[aria-checked="true"] {
+      .alert-radio-label {
+        color: #fff !important;
+      }
+    }
+  }
+
+  .item {
+    --border-color: $borderBottomInput;
+    --highlight-background: $borderBottomInput;
+
+    ion-label {
+      text-transform: uppercase;
+      --color: #000;
+      letter-spacing: 1px;
+      font-size: 14px;
+    }
+
+    ion-input, ion-select, ion-datetime {
+      --color: black;
+      font-size: 20px;
+      height: 40px;
+      --placeholder-color: $borderBottomInput;
+      --placeholder-opacity: 0.4;
+      --icon-color: #fff;
+    }
+
+    ion-select {
+      color: black;
+      opacity: 1;
+    }
+
+    &-has-focus,
+    &-has-value {
+      --border-color: $borderBottomInput;
+
+      .label-stacked {
+        color: black;
+      }
+
+      input, ion-select, ion-datetime {
+        color: black;
+        --color: black;
+        opacity: 1;
+      }
+    }
+
+    .ng-valid {
+      color: black;
+      --border-color: $borderBottomInput;
+    }
+  }
+
+  .transactions-toolbar {
+  }
+
+  ion-segment-button {
+    height: 65px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid $borderBottomInput;
+    ion-icon {
+      color: $greyColor !important;
+    }
+  }
+
+  .segment-button-checked {
+    background: none !important;
+    border-bottom: 3px solid $orangeColor !important;
+    --color-checked: none;
+    ion-icon {
+      color: $orangeColor !important;
+    }
+
+    ion-label {
+      color: $mainColor;
+    }
+  }
+
+  .modal-wrapper {
+    background: $backgroundColor;
+  }
+
+  .searchbar-modal {
+    background: $backgroundColor;
+
+    ion-icon {
+      --icon-color: #18a0fb;
+    }
+
+    ion-searchbar {
+      --color: #fff;
+
+      input {
+        border-bottom: 1px solid #18a0fb;
+        color: #ffffff !important;
+
+        &::placeholder {
+          color: #18a0fb;
+        }
+      }
+    }
+
+    .searchbar-has-focus,
+    .searchbar-has-value {
+      input {
+        border-bottom-color: #18a0fb;
+      }
+    }
+  }
+
+  app-tabs {
+    background: $backgroundColor;
+    height: 70px;
+    button {
+      color: $greyColor;
+      font-weight: 700;
+    }
+
+    .active {
+      color: $mainColor;
+    }
+
+    ion-label {
+      font-size: 10px;
+      margin-top: 12px;
+    }
+  }
+
+  ion-toggle {
+    --background-checked: #9fd6ff;
+  }
+
+  .slides-md {
+    --bullet-background-active: #9fd6ff;
+  }
+
+  app-documents {
+
+    ion-icon[name="attach"] {
+      color: #9fd6ff;
+    }
+  }
+
+  .pay-logo {
+    min-height: 193px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-image: url('../assets/images/whitelabel-icons/coinoro.svg');
+  }
+
+  .pay-authentication {
+    color: #ffffff;
+  }
+
+  .delete-upload-file {
+    font-size: 26px !important;
+    color: #ffffff !important;
+  }
+
+  .pay-authentication-footer span a {
+    color: #fff;
+    border-bottom-color: $skyColor;
+  }
+
+  .pay-forgot-password-link a {
+    color: #fff;
+  }
+
+  app-wallets, app-transactions, app-requests, app-transactions-by-address {
+
+    ion-card {
+      background-color: $backgroundColor;
+      box-shadow: 0 0 40px rgba(0,0,0,0.1);
+      border-radius: 5px;
+      z-index: 2;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        display: block;
+        z-index: -1;
+        overflow: hidden;
+        top: -50px;
+        left: -35px;
+        background: #2D8DFF;
+        opacity: 0.07;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 85px;
+        height: 85px;
+        border-radius: 50%;
+        display: block;
+        z-index: -1;
+        overflow: hidden;
+        bottom: -5px;
+        left: -20px;
+        background: #2D8DFF;
+        opacity: 0.05;
+      }
+
+      ion-icon {
+        color: $blueSecondaryColor;
+        flex: 0 0 auto;
+        font-size: 24px;
+      }
+    }
+
+    .requests-send-coins {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-image: linear-gradient(45deg, #00a9c9 0%, $greenColor 100%);
+      background-repeat: repeat;
+      border: none;
+      z-index: 100000;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+
+      ion-icon {
+        font-size: 20px;
+        color: $whiteColor;
+      }
+    }
+
+    .wallet-currency-name {
+      font-family: $semiBoldFont;
+      font-size: 18px;
+
+      span {
+        font-family: $semiBoldFont;
+        font-size: 15px;
+        color: $sky2Color !important;
+        padding-left: 5px;
+        text-transform: capitalize;
+      }
+    }
+
+    .wallet-balance {
+      font-size: 18px;
+    }
+
+    svg-icon {
+      background-color: #9fd6ff;
+    }
+  }
+
+  .requests-send-coins {
+
+    ion-icon {
+      color: #9fd6ff !important;
+    }
+  }
+
+  .exchange-information {
+    overflow-x: scroll;
+
+    ion-icon {
+      color: #9fd6ff;
+    }
+  }
+
+  .account-details {
+    color: #9fd6ff;
+  }
+
+  .pay {
+
+    &-main-button {
+      background: #FF550C;
+      font-family: $semiBoldFont;
+    }
+  }
+
+  .create-fiat-button {
+    background: #FF550C;
+  }
+
+  .request-funds-button {
+    background: $mainColor !important;
+  }
+
+  .view-transactions-list-button {
+    background: #292929 !important;
+    color: #ffffff;
+  }
+
+  ion-segment {
+
+    ion-icon {
+    }
+  }
+
+  ion-refresher {
+    --color: #fff;
+  }
+
+  .toast-message-success {
+    --background: #e1f3ff;
+    --font-size: 14px;
+    --color: #00243d;
+    text-align: center;
+    bottom: 70px !important;
+    max-width: 90%;
+    font-family: $lightFont;
+    text-align: center;
+    line-height: 26px;
+    margin: 0 auto;
+    height: auto;
+    left: 0;
+    right: 0;
+  }
+
+  .toast-message-error {
+    @extend .toast-message-success;
+    --background: #ed2350;
+    --color: #ffffff;
+  }
+
+  .push-notification-toast {
+    --background: #fff;
+    text-align: center;
+    --width: 95%;
+    --box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+    --color: #ffffff;
+  }
+
+  .details-wrapper {
+
+    &-options {
+
+      &-balance {
+        padding: 15px 10px;
+        border-radius: 3px;
+        background-image: linear-gradient(168.49deg, #F8A423 0.94%, #F57C00 91.79%);;
+        margin-right: 20px;
+        flex-grow: 1;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+
+        h2 {
+          font-size: 15px;
+          color: $skyColor;
+          text-transform: uppercase;
+        }
+
+        p {
+          font-size: 20px;
+          color: $whiteColor;
+          text-transform: uppercase;
+          margin: 0;
+        }
+
+        img {
+          position: absolute;
+          width: 75px;
+          height: 75px;
+          bottom: -5px;
+          right: -15px;
+          z-index: -1;
+          opacity: 0.25;
+        }
+      }
+
+      &-qr-code {
+        width: 100%;
+        max-width: 100px;
+        border-radius: 3px;
+        background-color: $whiteColor;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $whiteColor;
+        position: relative;
+        z-index: 1;
+
+        .account-qr-image {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: 0;
+          display: block;
+          background-repeat: no-repeat;
+          background-size: 85%;
+          background-position: center;
+          z-index: -1;
+          opacity: 0.8;
+        }
+
+        ion-icon {
+          font-size: 40px;
+        }
+      }
+
+      &-coin {
+        border-radius: 5px;
+        background-image: linear-gradient(168.49deg, #F8A423 0.94%, #F57C00 91.79%);
+        max-width: 135px;
+        width: 100%;
+        min-height: 110px;
+        color: $whiteColor;
+        text-transform: uppercase;
+        font-size: 18px;
+        padding: 20px;
+        line-height: 30px;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+
+        ion-icon {
+          display: none;
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          top: 0;
+          left: 0;
+          right: 0;
+          background-image: url('../assets/images/themes/coinexodeepp/down-arrow.png');
+          background-repeat: no-repeat;
+          background-position: -10px 25px;
+          z-index: -1;
+          background-size: 60%;
+          opacity: 0.5;
+        }
+
+        &:first-child {
+          margin-right: 30px;
+
+          &::after {
+            background-image: url('../assets/images/themes/coinexodeepp/arrow-up.png');
+          }
+        }
+      }
+    }
+
+    &-information {
+      margin-top: 30px;
+
+      h2 {
+        color: $greyLabelColor;
+        font-size: 15px;
+        text-transform: uppercase;
+      }
+
+      p {
+        color: black;
+      }
+    }
+
+    &-wallet-address {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      span {
+        background-color: #D9E1EA;
+        height: 40px;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 100%;
+        margin-right: 30px;
+        text-overflow: ellipsis;
+        border-radius: 5px;
+        padding: 10px 25px 10px 15px;
+        display: block;
+        color: black !important;
+      }
+
+      ion-icon, .copy-icon {
+        position: absolute;
+        right: 0;
+        align-content: center;
+        justify-content: center;
+        display: flex;
+        padding: 15px;
+        z-index: 2;
+        border-radius: 50%;
+        background-color: #D9E1EA;
+        color: $skyColor;
+
+        &::before {
+          display: flex;
+          align-items: center
+        }
+      }
+    }
+  }
+
+  .pay-card-content-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    svg-icon {
+      min-width: 50px;
+      min-height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 16px;
+      margin-left: -25px;
+      border-radius: 50%;
+      background-color: #0bafb9 !important;
+      position: relative;
+
+      svg {
+        width: 50px;
+
+        .cls-1, .cls-2 {
+          fill: #fff !important;
+          stroke: none;
+        }
+      }
+    }
+
+    svg-icon.wallet-currency-name {
+      &-bitcoin {
+        fill: none !important;
+        stroke: none !important;
+
+        .cls-1 {
+          fill: #ff9300 !important;
+        }
+      }
+
+      &-litecoin {
+        fill: none !important;
+
+        .cls-1 {
+          fill:#909090 !important;
+          stroke: none !important;
+        }
+
+        .cls-2 {
+          fill:#fdfdfd !important;
+        }
+      }
+
+      &-ethereum {
+        fill: none !important;
+
+        .cls-1 {
+          fill:#6c87ec !important;
+          stroke: none !important;
+        }
+      }
+
+      &-dash {
+        fill: none !important;
+
+        .cls-1 {
+          fill:#0076c0 !important;
+          stroke: none !important;
+        }
+      }
+
+      &-usdc {
+        fill: none !important;
+        stroke: none !important;
+
+        .cls-1 {
+          fill: #2775ca !important;
+        }
+      }
+    }
+
+    &-description {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      flex-grow: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: $sky2Color;
+    }
+
+    .wallet-name {
+      width: 100%;
+      color: $mainColor !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-right: 50px;
+      font-family: $semiBoldFont;
+      text-transform: uppercase;
+
+      span {
+        font-size: 12px;
+        text-transform: capitalize;
+        font-family: $lightFont;
+      }
+
+      .init {
+        color: #009bff;
+      }
+
+      .error {
+        color: #ff6363;
+      }
+
+      .success, .confirmed {
+        color: green !important;
+      }
+
+      .pending, .unconfirmed {
+        color: #fad9ad;
+      }
+    }
+  }
+
+  app-pin-code {
+    .pin-code-input-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0 30px 0;
+    }
+
+    ion-grid {
+      padding: 0 30px;
+      ion-button {
+        color: #ffffff;
+        border: 1px solid $blueColor;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        --background: rgba(255, 255, 255, 0.05);
+        --border-radius: 50%;
+        --color-activated: #415aba;
+      }
+    }
+
+    ion-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      ion-button {
+        color: $blueColor;
+        font-size: 18px;
+        --background: none;
+        --box-shadow: none;
+        --ripple-color: transparent;
+        margin-bottom: 20px;
+      }
+    }
+
+    .dots {
+      background-color: rgba(255, 255, 255, 0.05);
+
+      &.filled {
+        background-color: $blueColor;
+      }
+    }
+  }
+
+  app-crypto-wallet-details, app-fiat-wallet-details {
+
+    .toolbar-title {
+
+      > span {
+        position: relative;
+      }
+
+      &::before {
+        position: absolute;
+        bottom: -15px;
+        left: 0;
+        right: 0;
+        content: 'edit';
+        font-size: 14px;
+        color: $blueColor;
+      }
+
+      &::after {
+        content: '';
+        width: 12px;
+        height: 12px;
+        background-size: contain;
+        position: absolute;
+        right: -50px;
+        left: 0;
+        bottom: -12px;
+        display: block;
+        margin: 0 auto;
+      }
+    }
+
+    .details-wrapper-options {
+      margin-top: 0 !important;
+      flex-direction: row;
+
+      .pay-main-button {
+        border-radius: 5px;
+        background: #FF550C;
+        width: 100%;
+        min-height: 110px;
+        color: $whiteColor;
+        font-family: $semiBoldFont;
+        text-transform: uppercase;
+        font-size: 18px;
+        padding: 28px;
+        line-height: 30px;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+
+        ion-icon {
+          display: none;
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          top: 0;
+          left: 0;
+          right: 0;
+          background-image: url('../assets/images/themes/coinexodeepp/down-arrow.png');
+          background-repeat: no-repeat;
+          background-position: -10px 25px;
+          z-index: -1;
+          background-size: 60%;
+          opacity: 0.5;
+        }
+
+        &:first-child {
+          margin-right: 10px;
+
+          &::after {
+            background-image: url('../assets/images/themes/coinexodeepp/arrow-up.png');
+          }
+        }
+      }
+    }
+  }
+
+  app-fiat-wallet-details {
+
+    .details-wrapper-options-balance {
+      color: #fff;
+      svg-icon {
+        position: absolute;
+        width: 75px;
+        height: 75px;
+        bottom: -5px;
+        right: -15px;
+        z-index: -1;
+        opacity: 0.15;
+        fill: #fff;
+        background-color: #fff;
+        border-radius: 50%;
+      }
+      h2 {
+        color: #fff;
+      }
+    }
+  }
+
+  app-settings {
+
+    ion-list {
+      background: none;
+
+      .item {
+        color: #3B5166;
+
+        &:last-child {
+          --border-color: transparent !important;
+        }
+
+        ion-icon {
+          color: #0119EE;
+          &:first-child {
+            margin-right: 15px;
+          }
+
+          &:last-child {
+            position: absolute;
+            right: 0;
+          }
+        }
+      }
+    }
+
+    ion-item {
+      margin-bottom: 30px !important;
+
+      ion-icon {
+        color: $skyColor;
+      }
+
+      .label {
+        color: $skyColor !important;
+        font-family: $regularFont;
+        font-family: $regularFont;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        ion-icon {
+          color: $blueSecondaryColor;
+          font-size: 24px;
+        }
+      }
+
+      .item-inner {
+        border: none !important;
+      }
+    }
+  }
+
+  .success-wrapper-title, .successfull-wrapper-title, .cancel-wrapper-title {
+    color: #ffffff !important;
+    font-family: $semiBoldFont;
+  }
+
+  app-fingerprint, app-verify, app-qr-scanner, app-change-notifications {
+
+    p {
+      color: $whiteColor;
+      text-align: center;
+      line-height: 1.6;
+    }
+  }
+
+  ion-toggle {
+    --background: #fff;
+    --background-checked: #9fd6ff;
+    --handle-background-checked: #fff;
+    --handle-background: #fff;
+  }
+
+  app-activity {
+
+    ion-list {
+      background: none;
+    }
+
+    .label {
+      padding: 10px 0 !important;
+      margin: 0 !important;
+      color: $whiteColor !important;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+    }
+  }
+
+  .account-currency-name.exchange-information {
+    color: #18a0fb;
+  }
+
+  .custom-select {
+
+    ion-icon {
+      color: #18a0fb;
+    }
+  }
+
+  .operations-not-found {
+    h2, p {
+      color: #000;
+      size: 20px;
+      line-height: 24px;
+    }
+  }
+
+  .coinexo-slide {
+    color: #ffffff;
+  }
+
+  app-confirm-purchase .internal-transactions-amount div {
+    color: #ffffff !important;
+
+    .cls-1 {
+      fill: #ffffff !important;
+    }
+
+    .wallet-currency-name-ethereum {
+      .cls-1 {
+        fill: #6c87ec !important;
+      }
+    }
+
+    .wallet-currency-name-bitcoin {
+      .cls-1 {
+        fill: #ff9300 !important;
+      }
+    }
+
+    .wallet-currency-name-litecoin {
+      .cls-1 {
+        fill: #909090 !important;
+      }
+    }
+
+    .wallet-currency-name-dash {
+      .cls-1 {
+        fill: #0076c0 !important;
+      }
+    }
+  }
+
+  app-confirm-withdrawal, app-confirm-deposit {
+    .pay-transaction-footer {
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        width: 48%;
+      }
+
+      .pay-cancel-button {
+        background: $dangerColor;
+      }
+    }
+  }
+
+  app-cancel-withdrawal, app-cancel-deposit {
+    .cancel-wrapper {
+      button {
+        background: $dangerColor;
+      }
+    }
+  }
+
+  .pay-cancel-button {
+    background: $dangerColor !important;
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .has-info-icon {
+      width: 80%;
+    }
+
+    .help {
+      font-size: 30px;
+      background: $active;
+      border-radius: 50%;
+      color: white;
+    }
+  }
+
+  app-requisites {
+    .details-wrapper-information {
+      .details-wrapper-wallet-address {
+        span {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+
+  .available-currencies {
+    border-bottom: 1px solid #fff;
+  }
+
+  .searchbar-modal-wrapper {
+
+    h2 {
+      color: #fff;
+      font-family: $semiBoldFont;
+      text-transform: uppercase;
+      font-size: 16px;
+      margin: 3px 0;
+    }
+  }
+
+  .form-group {
+    position: relative;
+    margin-bottom: 20px;
+
+    ion-label {
+      text-transform: uppercase;
+      color: black;
+      letter-spacing: 1px;
+      font-size: 14px;
+      font-family: "ProximaNova-Semibold";
+    }
+
+    ion-input, ion-select, ion-datetime {
+      border-bottom: 1px solid #D9E1EA;
+      --padding-start: 0;
+      color: #BBC2CB;
+      font-size: 20px;
+      font-family: "ProximaNova-Light";
+      height: 45px;
+      --placeholder-color: #BBC2CB;
+      --placeholder-opacity: 0.4;
+    }
+
+    ion-datetime[aria-expanded="true"] {
+      border-bottom-color: #BBC2CB;
+    }
+
+    .has-value, .has-focus, .ng-valid {
+      border-bottom-color: #BBC2CB;
+      color: black;
+      opacity: 1;
+    }
+
+    .is-invalid {
+      border-bottom-color: $dangerColor;
+    }
+
+    .is-valid {
+      color: black;
+      border-bottom-color: #BBC2CB;
+    }
+
+    .invalid-feedback {
+      margin-top: 10px;
+      font-size: 12px;
+      font-family: "ProximaNova-Light";
+      color: black;
+    }
+
+    ion-icon {
+      position: absolute;
+      color: #BBC2CB;
+      top: 55%;
+      right: 20px;
+    }
+  }
+
+  .slider-logo {
+    svg {
+      max-width: 100px;
+      height: 50px;
+      width: 100%;
+      margin: 0 auto;
+
+      .cls-1 {
+        stroke: #fff !important;
+        fill: #fff !important;
+      }
+
+      .cls-2 {
+        stroke: #fff !important;
+        fill: #fff;
+      }
+    }
+  }
+
+  app-transactions-by-address  .segment-button-checked ion-label {
+    font-size: unset;
+
+    .wallet-name {
+      width: 100%;
+      color: #5790b8 !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-right: 50px;
+      font-family: $semiBoldFont;
+      text-transform: uppercase;
+
+      span {
+        font-size: 12px;
+        text-transform: capitalize;
+        font-family: $lightFont;
+      }
+
+      .init {
+        color: #009bff;
+      }
+
+      .error {
+        color: #ff6363;
+      }
+
+      .success, .confirmed {
+        color: #00ffdb;
+      }
+
+      .pending, .unconfirmed {
+        color: #fad9ad;
+      }
+    }
+  }
+
+  .max-approve {
+    --border-radius: 30px;
+    --height: 25%;
+    align-items: center;
+    padding: 0 1rem;
+
+    app-crypto-maximal-modal, app-fiat-maximal-modal {
+      background: #00355b;
+
+      .max-container {
+        height: 100%;
+        width: 100%;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .max-description {
+          padding: 0 1rem;
+          text-align: center;
+          font-size: 1.3rem;
+          line-height: 1.5;
+          color: #ffffff;
+          font-family: "ProximaNova-Semibold";
+        }
+
+        .max-actions {
+          display: flex;
+          justify-content: space-around;
+
+          button {
+            height: 2.5rem;
+            width: 35%;
+            padding: 0;
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 0.6rem;
+            font-family: "ProximaNova-Semibold";
+            background: #FF550C;
+          }
+        }
+      }
+    }
+  }
+
+  app-generate-crypto-transaction,
+  app-ecosystem-transaction,
+  app-generate-fiat-transaction {
+    .amount-input-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      .form-group, .item {
+        flex: 1;
+        margin-right: 1rem;
+      }
+
+      .available-container {
+        height: 45px;
+        width: 45px;
+        display: flex;
+        padding: 0;
+        background: $mainColor;
+        border-radius: 30px;
+        margin-top: 1rem;
+        justify-content: center;
+        align-items: center;
+
+        ion-icon {
+          font-size: 2rem;
+        }
+      }
+
+      .available-container:disabled {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+.push-notifications-modal {
+  --background: transparent;
+
+  .modal-wrapper {
+    background: transparent;
+  }
+
+  app-push-notifications-modal {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 1rem 0.7rem 1rem;
+
+    .push-notify-container {
+      position: relative;
+      display: flex;
+      padding: 0.8rem;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      width: 100%;
+      margin-top: 0.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+      color: #ffffff;
+
+      .push-notify-content {
+        margin-right: 1rem;
+
+        .push-notify-title {
+          margin-bottom: 0.3rem;
+          font-weight: bold;
+          font-size: 14px;
+        }
+
+        .push-notify-message {
+          font-size: 15px;
+        }
+      }
+
+      .push-notify-action {
+        display: flex;
+
+        ion-icon {
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+}

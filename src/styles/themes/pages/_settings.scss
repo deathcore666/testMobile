@@ -1,0 +1,50 @@
+app-settings {
+
+  ion-list {
+    background: none;
+    
+    .item {
+      
+      &:last-child {
+        --border-color: transparent !important;
+      }
+
+      ion-icon {
+
+        &:first-child {
+          margin-right: 15px;
+        }
+
+        &:last-child {
+          position: absolute;
+          right: 0;
+        }
+      }
+    }
+  }
+
+  ion-item {
+    padding-left: 0 !important;
+    margin-bottom: 20px !important;
+  }
+
+  ion-item ion-icon {
+    color: $greenColor;
+    margin-right: 15px;
+  }
+
+  .otp-secret-code {
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  
+    ion-icon {
+      padding-left: 5px;
+      font-size: 30px;
+      color: $greenColor;
+    }
+  }
+}

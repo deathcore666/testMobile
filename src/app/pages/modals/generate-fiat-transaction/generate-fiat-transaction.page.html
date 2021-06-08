@@ -1,0 +1,222 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ 'sendFiatFunds.title' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-slides pager="true" [options]="slideOpts" *ngIf="currencyDetails">
+    <ion-slide class="coinexo-slide">
+      <div>
+        <svg-icon src="./assets/images/shared/{{ecosystemIcon}}-ecosystem.svg" class="slider-logo">
+        </svg-icon>
+        <h1 class="slide-title ecosystem">{{ 'sendFiatFunds.ecosystem' | translate }}</h1>
+        <p class="description">
+          {{ 'sendFiatFunds.ecosystemDescription' | translate }}
+        </p>
+      </div>
+
+      <div>
+        <ion-item no-padding>
+          <ion-label position="stacked">
+            {{ 'sendFiatFunds.labelIdentifier' | translate }}
+          </ion-label>
+          <ion-input
+            (ionFocus)="disableSlider()"
+            (ionBlur)="enableSlider()"
+            #identifierInput
+            name="identifierInput"
+            autocomplete="on"
+            placeholder="{{ 'sendFiatFunds.placeholderIdentifier' | translate }}"
+            [(ngModel)]="identifier"
+            required></ion-input>
+        </ion-item>
+    
+        <button
+          [disabled]="!identifier"
+          type="submit"
+          class="pay-main-button"
+          (click)="next('ecosystem')">
+    
+          {{ 'common.continue' | translate }}
+        </button>
+      </div>
+
+      <p class="slide-description" *ngIf="data.currencyCode === 'EUR'">
+        {{ 'sendFiatFunds.swipeToSepaSwift' | translate }}
+      </p>
+      <p class="slide-description" *ngIf="data.currencyCode !== 'EUR' && data.currencyCode !== 'GBP'">
+        {{ 'sendFiatFunds.swipeToSwift' | translate }}
+      </p>
+      <p class="slide-description" *ngIf="data.currencyCode === 'GBP'">
+        Swipe to SWIFT/CHAPS transactions
+      </p>
+    </ion-slide>
+
+    <ion-slide *ngFor="let type of currencyDetails.paymentMethods" class="coinexo-slide">
+      <div>
+        <svg-icon
+          src="./assets/images/shared/sepa.svg"
+          class="slider-logo"
+          *ngIf="type === 'SEPA' && data.currencyCode === 'EUR'">
+        </svg-icon>
+
+        <svg-icon
+          src="./assets/images/shared/SWIFT_logo.svg"
+          class="slider-logo"
+          *ngIf="type === 'SWIFT'">
+        </svg-icon>
+
+        <svg-icon
+          src="./assets/images/shared/chaps.svg"
+          class="slider-logo"
+          *ngIf="type === 'CHAPS'">
+        </svg-icon>
+
+        <ng-container *ngIf="type === 'CHAPS'; else anotherPayment">
+          <h1>Faster Payment & <br>CHAPS transactions</h1>
+        </ng-container>
+        <ng-template #anotherPayment>
+          <h1 class="slide-title">{{ type }} transaction</h1>
+        </ng-template>
+
+        <p class="description" *ngIf="type === 'SEPA'">
+          {{ 'sendFiatFunds.sepaDescription' | translate }}
+        </p>
+
+        <p class="description" *ngIf="type === 'SWIFT'">
+          {{ 'sendFiatFunds.swiftDescription' | translate }}
+        </p>
+
+        <p class="description" *ngIf="type === 'CHAPS'">
+          {{ 'sendFiatFunds.swiftDescription' | translate }}
+        </p>
+      </div>
+
+      <div *ngIf="type === 'SEPA'">
+        <div class="amount-input-container">
+          <ion-item no-padding [ngClass]="{ 'custom-has-error': amount < 1 }">
+            <ion-label position="stacked">
+              {{ 'sendFiatFunds.labelAmount' | translate }}
+            </ion-label>
+            <ion-input
+              (ionFocus)="disableSlider()"
+              (ionBlur)="enableSlider()"
+              #sepaAmountInput
+              name="sepaAmountInput"
+              type="number"
+              min="1"
+              [(ngModel)]="sepaAmount"
+              placeholder="{{ 'sendFiatFunds.placeholderAmount' | translate }}"
+              required></ion-input>
+          </ion-item>
+          <button
+            (click)="getMaximumFiatAmount('sepa')"
+            type="button"
+            class="available-container">
+            <ion-icon src="./assets/images/themes/coinexodeepp/max-amout.svg"></ion-icon>
+          </button>
+        </div>
+
+        <button
+          [disabled]="!sepaAmount || sepaAmount < 1"
+          type="submit"
+          class="pay-main-button"
+          (click)="next(type)">
+    
+          {{ 'common.continue' | translate }}
+        </button>
+      </div>
+
+      <div *ngIf="type === 'CHAPS'">
+        <div class="amount-input-container">
+          <ion-item no-padding [ngClass]="{ 'custom-has-error': amount < 1 }">
+            <ion-label position="stacked">
+              {{ 'sendFiatFunds.labelAmount' | translate }}
+            </ion-label>
+            <ion-input
+              (ionFocus)="disableSlider()"
+              (ionBlur)="enableSlider()"
+              #shapsAmountInput
+              name="shapsAmountInput"
+              type="number"
+              min="1"
+              [(ngModel)]="chapsAmount"
+              placeholder="{{ 'sendFiatFunds.placeholderAmount' | translate }}"
+              required></ion-input>
+          </ion-item>
+          <button
+            (click)="getMaximumFiatAmount('swift', true)"
+            type="button"
+            class="available-container">
+            <ion-icon src="./assets/images/themes/coinexodeepp/max-amout.svg"></ion-icon>
+          </button>
+        </div>
+
+        <button
+          [disabled]="!chapsAmount || chapsAmount < 1"
+          type="submit"
+          class="pay-main-button"
+          (click)="next(type)">
+
+          {{ 'common.continue' | translate }}
+        </button>
+      </div>
+
+      <div *ngIf="type === 'SWIFT'">
+        <div class="amount-input-container">
+          <ion-item no-padding [ngClass]="{ 'custom-has-error': amount < 1 }">
+            <ion-label position="stacked">
+              {{ 'sendFiatFunds.labelAmount' | translate }}
+            </ion-label>
+            <ion-input
+              (ionFocus)="disableSlider()"
+              (ionBlur)="enableSlider()"
+              #swiftAmountInput
+              name="swiftAmountInput"
+              type="number"
+              min="1"
+              [(ngModel)]="swiftAmount"
+              placeholder="{{ 'sendFiatFunds.placeholderAmount' | translate }}"
+              required></ion-input>
+          </ion-item>
+          <button
+            (click)="getMaximumFiatAmount('swift')"
+            type="button"
+            class="available-container">
+            <ion-icon src="./assets/images/themes/coinexodeepp/max-amout.svg"></ion-icon>
+          </button>
+        </div>
+
+        <button
+          [disabled]="!swiftAmount || swiftAmount < 1"
+          type="submit"
+          class="pay-main-button"
+          (click)="next(type)">
+
+          {{ 'common.continue' | translate }}
+        </button>
+      </div>
+      <p *ngIf="type === 'SEPA' && data.currencyCode === 'EUR'" class="slide-description">
+        {{ 'sendFiatFunds.swipeToEcosystemSwift' | translate }}
+      </p>
+      <p *ngIf="type === 'SWIFT' && data.currencyCode === 'EUR'" class="slide-description">
+        {{ 'sendFiatFunds.swipeToEcosystemSepa' | translate }}
+      </p>
+      <p *ngIf="type === 'SWIFT' && data.currencyCode !== 'EUR' && data.currencyCode !== 'GBP'" class="slide-description">
+        {{ 'sendFiatFunds.swipeToEcosystem' | translate }}
+      </p>
+      <p *ngIf="type === 'SWIFT' && data.currencyCode === 'GBP'" class="slide-description">
+        Swipe to Ecosystem/CHAPS transactions
+      </p>
+      <p *ngIf="type === 'CHAPS' && data.currencyCode === 'GBP'" class="slide-description">
+        Swipe to Ecosystem/SWIFT transactions
+      </p>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

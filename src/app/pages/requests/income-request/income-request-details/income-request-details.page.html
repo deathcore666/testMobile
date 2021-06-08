@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button (click)="closeModal()" type="button" ion-button icon-only>
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ 'incomeRequestDetails.title' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="incomeRequest">
+    <button class="pay-main-button" (click)="sendFunds()">
+      {{ 'common.sendFunds' | translate }}
+    </button>
+
+    <div class="details-wrapper-information">
+      <h2>
+        {{ 'incomeRequestDetails.sender' | translate }}
+      </h2>
+      <p>
+        {{ incomeRequest.sender }}
+      </p>
+    </div>
+  
+    <div class="details-wrapper-information">
+      <h2>
+        {{ 'incomeRequestDetails.recipient' | translate }}
+      </h2>
+      <p>
+        {{ incomeRequest.recipient }}
+      </p>
+    </div>
+  
+    <div class="details-wrapper-information">
+      <h2>
+        {{ 'incomeRequestDetails.amount' | translate }}
+      </h2>
+      <p>
+        {{ incomeRequest.amount }} {{ incomeRequest.currencyName }}
+      </p>
+    </div>
+  
+    <div class="details-wrapper-information">
+      <h2> {{ 'incomeRequestDetails.toAddress' | translate }} </h2>
+      <p class="details-wrapper-wallet-address">
+        <span>{{ incomeRequest.address }}</span>
+        <ion-icon
+          class="copy-icon"
+          name="ios-copy"
+          (click)="successCopy(incomeRequest.address)">
+        </ion-icon>
+      </p>
+    </div>
+    
+    <div class="details-wrapper-information">
+      <h2>
+        {{ 'incomeRequestDetails.createdAt' | translate }}
+      </h2>
+      <p>
+        {{ incomeRequest.createdAt | date: 'MMM d, y - H:mm:ss' }}
+      </p>
+    </div>
+
+    <div *ngIf="incomeRequest.notes" class="details-wrapper-information">
+      <h2>
+        {{ 'incomeRequestDetails.notes' | translate }}
+      </h2>
+      <p>
+        {{ incomeRequest.notes }}
+      </p>
+    </div>
+  </div>
+</ion-content>

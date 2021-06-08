@@ -1,0 +1,17 @@
+<div class="max-container">
+  <div class="max-description">
+    Are your sure want to send max
+    <ng-container *ngIf="maximalAmount; else noAmount">
+      {{ maximalAmount }}
+    </ng-container>
+    <ng-template #noAmount>
+      00.000000
+    </ng-template>
+    {{ data?.currencyCode }}
+  </div>
+  <div class="max-actions">
+    <button (click)="modalCtrl.dismiss(false)">No</button>
+    <button (click)="modalCtrl.dismiss(maximalAmount)">Yes</button>
+  </div>
+</div>
+

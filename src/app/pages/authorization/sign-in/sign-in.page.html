@@ -1,0 +1,64 @@
+<ion-content padding no-bounce>
+  <div class="pay-authentication-wrapper">
+    <a class="pay-logo"></a>
+
+    <form
+      [formGroup]="signInForm"
+      class="pay-authentication"
+      (ngSubmit)="signIn()"
+      novalidate>
+
+      <div class="pay-authentication-form">
+        <div class="form-group">
+          <ion-label class="sing-in-label" position="stacked">{{ 'signIn.label' | translate }}</ion-label>
+          <ion-input
+            [ngClass]="{
+              'is-valid': isControlStatus('userEmail', 'valid'),
+              'is-invalid': isControlStatus('userEmail', 'invalid')
+            }"
+            formControlName="userEmail"
+            autocomplete="off"
+            placeholder="{{ 'signIn.placeholder' | translate }}"
+            name="userEmailInput"
+            type="email">
+          </ion-input>
+          <div *ngIf="isControlStatus('userEmail', 'invalid')" class="invalid-feedback">
+            <div
+              class="error"
+              *ngIf="signInForm.get('userEmail').hasError('required')">
+              Email is required
+            </div>
+            <div
+              class="error"
+              *ngIf="signInForm.get('userEmail').hasError('email')">
+              Invalid email
+            </div>
+          </div>
+        </div>
+
+        <button
+          [disabled]="signInForm.invalid"
+          type="submit"
+          class="pay-main-button">
+
+          {{ 'common.continue' | translate }}
+        </button>
+
+        <div class="pay-forgot-password-link">
+          <a [routerLink]="['/forgot-password']">
+            {{ 'common.forgotPassword' | translate }}
+          </a>
+        </div>
+      </div>
+    </form>
+
+    <footer class="pay-authentication-footer">
+      <span>
+        {{ 'common.noAccounts' | translate }}
+        <a [routerLink]="['/sign-up']">
+          {{ 'common.signUp' | translate }}
+        </a>
+      </span>
+    </footer>
+  </div>
+</ion-content>

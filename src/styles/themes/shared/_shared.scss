@@ -1,0 +1,677 @@
+@import './ionic';
+
+app-tabs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 55px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: $whiteColor;
+
+  button {
+    flex-grow: 1;
+    color: #000;
+    font-size: 12px;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    font-family: 700;
+
+    ion-icon {
+      margin-bottom: 5px;
+      font-size: 20px;
+    }
+
+    .swap {
+      transform: rotate(90deg);
+    }
+  }
+
+  .active {
+    color: #21cd99;
+  }
+}
+
+.custom-select {
+  position: relative;
+
+  ion-icon {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 20px;
+    color: #000;
+  }
+}
+
+.custom-no-padding {
+  padding-left: 10px !important;
+}
+
+.generate-wallet {
+  margin-bottom: 20px;
+}
+
+.create-fiat-button {
+  background: #000000;
+}
+
+.cancel-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 25px;
+  right: 25px;
+
+  ion-icon {
+    color: $dangerColor;
+    font-size: 100px;
+  }
+
+  &-title {
+    margin: 20px 0;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  &-button {
+    margin-top: 20px;
+    background: $dangerColor !important;
+  }
+}
+
+.successfull-wrapper {
+  @extend .cancel-wrapper;
+
+  ion-icon {
+    color: $greenColor;
+  }
+
+  &-title {
+    margin: 20px 0;
+    font-size: 24px;
+  }
+
+  &-button {
+    margin-top: 20px;
+    background: $mainColor;
+  }
+}
+
+.swipe {
+  height: 100%;
+}
+
+.pay {
+
+  &-main-button {
+    background: $mainColor;
+    min-height: 50px;
+    margin: 20px 0;
+    box-shadow: none;
+    width: 100%;
+    color: $whiteColor;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 4px;
+
+    &:disabled {
+      opacity: 0.25;
+    }
+  }
+
+  &-logo {
+    flex: 0 0 auto;
+    display: block;
+    margin: 25px auto 10px;
+    max-width: 250px;
+    width: 100%;
+    display: block;
+    background-image: url('../assets/images/whitelabel-icons/coinexo.png');
+    min-height: 70px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+
+  &-authentication {
+    width: 100%;
+    padding: 10px;
+
+    &-notify {
+      font-size: 12px;
+    }
+
+    &-wrapper {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    &-button {
+      background: $mainColor;
+      min-height: 50px;
+      margin: 0 auto;
+      box-shadow: none;
+      font-size: 16px;
+      font-weight: 500;
+      text-transform: uppercase;
+      width: 100%;
+      color: $whiteColor;
+      font-size: 16px;
+      font-family: $semiBoldFont;
+
+      &:disabled {
+        opacity: 0.3;
+      }
+
+      ion-icon {
+        display: none;
+      }
+    }
+
+    &-footer {
+      margin-top: 30px;
+      padding-bottom: 10px;
+      flex-grow: 1;
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+
+      span {
+        color: $secondaryColor;
+        font-size: 18px;
+
+        a {
+          padding-bottom: 2px;
+          color: $greenColor;
+          border-bottom: 1px solid $greenColor;
+        }
+      }
+    }
+  }
+
+  &-forgot-password-link {
+    text-align: center;
+
+    a {
+      display: block;
+      margin: 20px 0;
+      color: $greenColor;
+      font-size: 18px;
+    }
+  }
+
+  &-scan-button,
+  &-account-button,
+  &-request-button {
+    --width: 40px;
+    --background: $headerBackgroundColor;
+    --box-shadow: none;
+    --background-activated: $fabButtonColor;
+    width: 40px;
+    height: 40px;
+    background: $headerBackgroundColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 16px;
+    color: #ffffff;
+    padding: 5px;
+    z-index: 1;
+
+    ion-icon {
+      font-size: 30px;
+    }
+  }
+
+  &-request-button {
+    right: 16px;
+    left: auto;
+  }
+
+  &-scan-button {
+    right: 16px;
+    left: auto;
+
+    &::after {
+      content: 'pay';
+      font-size: 8px;
+      color: $whiteColor;
+      top: 50%;
+      font-family: $semiBoldFont;
+      position: absolute;
+      text-transform: uppercase;
+      left: 0;
+      right: 0;
+      transform: translateY(-35%);
+    }
+  }
+}
+
+.details-wrapper {
+
+  &-options {
+    margin-top: 10px;
+    display: flex;
+
+    &-balance {
+
+      h2 {
+        font-size: 20px;
+        color: $blackColor;
+        font-weight: 700;
+      }
+
+      p {
+        color: $blackColor;
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+      }
+    }
+
+    &-coin {
+      max-width: 100%;
+      text-transform: none;
+
+      ion-icon {
+        color: $greenColor;
+        font-size: 24px;
+        margin-right: 20px;
+        width: 30px;
+      }
+    }
+  }
+
+  &-information {
+
+    h2 {
+      color: $blackColor;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      color: $blackColor;
+      display: flex;
+      align-items: center;
+
+      span {
+        color: $blackColor;
+        max-width: 90%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      ion-icon {
+        margin-left: 5px;
+        font-size: 30px;
+        color: $greenColor;
+      }
+    }
+  }
+
+  &-wallet-address {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    span {
+      color: $blackColor;
+    }
+
+    ion-icon {
+      margin-left: 5px;
+      font-size: 24px;
+    }
+  }
+}
+
+app-crypto-wallet-details, app-fiat-wallet-details {
+
+  .details-wrapper-options-balance {
+    border-radius: 5px;
+    background: #292929;
+    color: #fff;
+    img, svg-icon {
+      display: none;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+    h2 {
+      color: $whiteColor;
+    }
+  }
+
+  .details-wrapper .details-wrapper-options {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .details-wrapper {
+    &-options {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .details-wrapper-options-qr-code {
+    color: $whiteColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .details-wrapper-information {
+
+    ion-icon {
+      color: $greenColor;
+    }
+  }
+
+  .details-wrapper-options {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      margin: 10px 0;
+    }
+  }
+}
+
+app-wallets, app-transactions, app-requests, app-transactions-by-address {
+
+  svg-icon {
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: relative;
+
+    svg {
+      width: 40px;
+
+      .cls-1, .cls-2 {
+        fill: #fff !important;
+        stroke: none;
+      }
+    }
+  }
+
+  svg-icon.wallet-currency-name {
+    &-bitcoin {
+      fill: none !important;
+      stroke: none !important;
+
+      .cls-1 {
+        fill: #ff9300 !important;
+        stroke: none !important;
+      }
+    }
+
+    &-litecoin {
+      fill: none !important;
+      stroke: none !important;
+
+      .cls-1 {
+        fill:#909090 !important;
+        stroke: none !important;
+      }
+
+      .cls-2 {
+        fill:#fdfdfd !important;
+      }
+    }
+
+    &-ethereum {
+      fill: none !important;
+      stroke: none !important;
+
+      .cls-1 {
+        fill:#6c87ec !important;
+        stroke: none !important;
+      }
+    }
+
+    &-dash {
+      fill: none !important;
+      stroke: none !important;
+
+      .cls-1 {
+        fill:#0076c0 !important;
+        stroke: none !important;
+      }
+    }
+  }
+
+  ion-card {
+    background-color: $whiteColor;
+    margin-bottom: 15px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    position: relative;
+    z-index: 2;
+
+    .pay-card-content-wrapper {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-height: 75px;
+      padding: 17px;
+
+      &-description {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        flex-grow: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        > div {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          color: $blackColor;
+          font-size: 16px;
+        }
+
+        span {
+          display: flex;
+          color: $blackColor;
+          font-family: $semiBoldFont;
+          font-size: 16px;
+          white-space: nowrap;
+        }
+      }
+
+      .wallet-name {
+        width: 100%;
+        color: #818382;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+        font-family: $regularFont;
+        padding-right: 0;
+
+        span {
+          font-size: 12px;
+          text-transform: capitalize;
+          font-family: $lightFont;
+        }
+
+        .init {
+          color: #009bff;
+        }
+
+        .error {
+          color: #ff6363;
+        }
+
+        .success, .confirmed {
+          color: #00ffdb;
+        }
+
+        .pending, .unconfirmed {
+          color: #fad9ad;
+        }
+      }
+    }
+  }
+
+  ion-card-content {
+    display: flex;
+    align-items: center;
+  }
+}
+
+app-wallets, app-transactions, app-exchange, app-requests {
+  padding-bottom: 55px;
+
+  // &::after {
+  //   content: '';
+  //   background-image: url('assets/images/themes/coin-vaders/tabs-background-coin-vaiders.png');
+  //   position: absolute;
+  //   bottom: 0;
+  //   left: 0;
+  //   right: 0;
+  //   display: block;
+  //   height: 55px;
+  // }
+}
+
+app-transactions {
+  .exchange-currency-image {
+    margin-top: -30px;
+    margin-left: -15px;
+    z-index: 1;
+  }
+
+  .received-currecy-image {
+    margin-bottom: -30px;
+    margin-left: -35px !important;
+    background-color: $blackColor !important;
+  }
+}
+
+.exchange-information {
+  color: #000000;
+}
+
+.wallet-currency-name {
+  max-width: 70%;
+  padding-right: 28px;
+  display: block;
+  overflow: hidden;
+}
+
+.slides-md {
+  --bullet-background-active: #21cd99;
+}
+
+.account-details {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 10px 0;
+  color: #52bbb2;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: $lightFont;
+
+  ion-icon {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+}
+
+app-transactions {
+  .exchange-currency-image {
+    margin-top: -30px;
+    z-index: 1;
+  }
+
+  .received-currecy-image {
+    margin-bottom: -30px;
+    margin-left: -40px;
+    background-color: #14b4c8;
+  }
+}
+
+.exchange-icon {
+  display: inline-block;
+  font-size: 30px;
+  margin: 0 5px;
+}
+
+.exchange-information {
+  display: flex;
+  align-items: center;
+}
+
+.coinexo-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+
+  > div {
+    width: 100%;
+  }
+
+  .slide-description {
+    margin-bottom: 40px;
+  }
+}
+
+app-outgoing-transaction-list,
+app-incoming-transaction-list,
+app-exchange-list,
+app-purchase-list,
+app-deposit-list,
+app-withdrawal-list,
+app-income-request-list,
+app-outcome-request-list {
+  .refresher {
+    padding-bottom: 30px;
+  }
+}

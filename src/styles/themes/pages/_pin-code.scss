@@ -1,0 +1,42 @@
+app-pin-code {
+
+  .pin-code-input-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    input {
+      max-width: 90px;
+      font-size: 40px;
+      width: 100%;
+      color: $blackColor;
+      background: none;
+      border: none;
+      text-align: center;
+    }
+
+    ion-icon {
+      color: $blackColor;
+    }
+  }
+
+  ion-content {
+    button {
+      color: $blackColor;
+      border: 1px solid $blackColor;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  ion-footer {
+    button {
+      color: $blackColor;
+      background: none;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+  }
+}

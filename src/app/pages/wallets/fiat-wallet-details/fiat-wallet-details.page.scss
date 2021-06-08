@@ -1,0 +1,57 @@
+.top-up-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .top-up-container{
+    background-color: #00355b;
+    padding: 0 1rem;
+    width: 45%;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .to-up-input {
+      height: 40px;
+      width: 100%;
+      padding-right: 0.5rem;
+      background: transparent;
+      font-size: 20px;
+      line-height: 28px;
+      color: white;
+      border: 0;
+    }
+
+    .to-up-input::placeholder {
+      color: #18a0fb;
+      opacity: 0.4;
+    }
+
+    span {
+      color: #056CB9;
+      font-size: 18px;
+      line-height: 21px;
+    }
+  }
+
+  .top-up-action {
+    width: 50%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-family: 'ProximaNova-Light';
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    color: #ffffff;
+    background: linear-gradient(90deg, #AF36B5 0%, #2E8CC2 100%);
+    border-radius: 5px;
+  }
+
+  .top-up-action:disabled {
+    opacity: 0.25;
+  }
+}

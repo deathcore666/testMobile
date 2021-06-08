@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button (click)="closeModal()" ion-button icon-only>
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title> {{ 'purchaseDetails.title' | translate }} </ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="purchase">
+    <div class="details-wrapper-information">
+      <h2>{{ 'purchaseDetails.amount' | translate }}</h2>
+      <p>{{ purchase.amount }} {{ purchase.currencyCode }}</p>
+    </div>
+
+    <div class="details-wrapper-information">
+      <h2>{{ 'purchaseDetails.fromAddress' | translate }}</h2>
+      <p class="details-wrapper-wallet-address">
+        <span>{{ purchase.address }}</span>
+        <ion-icon
+          class="copy-icon"
+          name="ios-copy"
+          (click)="successCopy(purchase.address)">
+        </ion-icon>
+      </p>
+    </div>
+
+    <div class="details-wrapper-information">
+      <h2>{{ 'purchaseDetails.createdAt' | translate }}</h2>
+      <p>
+        {{ purchase.createdAt | date: 'MMM d, y - H:mm:ss' }}
+      </p>
+    </div>
+
+    <div class="details-wrapper-information">
+      <h2>{{ 'purchaseDetails.fee' | translate }}</h2>
+      <p> {{ purchase.fee }} </p>
+    </div>
+
+    <div class="details-wrapper-information">
+      <h2>{{ 'purchaseDetails.url' | translate }}</h2>
+      <p> {{ purchase.resourceURL }} </p>
+    </div>
+  </div>
+</ion-content>

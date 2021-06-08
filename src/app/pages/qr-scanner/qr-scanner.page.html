@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      {{ 'qrScanner.title' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <button (click)="scanCode()" class="pay-main-button">
+
+    <ion-icon name="qr-scanner"></ion-icon>
+    {{ 'qrScanner.scanCode' | translate }}
+  </button>
+
+</ion-content>

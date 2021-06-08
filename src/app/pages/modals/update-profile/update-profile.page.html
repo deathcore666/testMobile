@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ 'updateProfile.title' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form
+    [formGroup]="updateProfileForm"
+    (ngSubmit)="updateProfile()"
+    class="pay-authentication"
+    novalidate>
+
+    <div class="form-group">
+      <ion-label position="stacked">
+        {{ 'updateProfile.labelFirstName' | translate }}
+      </ion-label>
+      <ion-input
+        [ngClass]="{
+          'is-valid': isControlStatus('firstName', 'valid'),
+          'is-invalid': isControlStatus('firstName', 'invalid')
+        }"
+        formControlName="firstName"
+        type="text"
+        autocomplete="off"
+        placeholder="{{ 'updateProfile.placeholderFirstName' | translate }}">
+      </ion-input>
+      <div *ngIf="isControlStatus('firstName', 'invalid')" class="invalid-feedback">
+        <div
+          class="error"
+          *ngIf="updateProfileForm.get('firstName').hasError('required')">
+          First name is required
+        </div>
+        <div
+          class="error"
+          *ngIf="updateProfileForm.get('firstName').hasError('pattern')">
+          First name must contain only letters
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <ion-label position="stacked">
+        {{ 'updateProfile.labelLastName' | translate }}
+      </ion-label>
+      <ion-input
+        [ngClass]="{
+          'is-valid': isControlStatus('lastName', 'valid'),
+          'is-invalid': isControlStatus('lastName', 'invalid')
+        }"
+        formControlName="lastName"
+        type="text"
+        autocomplete="off"
+        placeholder="{{ 'updateProfile.placeholderLastName' | translate }}">
+      </ion-input>
+      <div *ngIf="isControlStatus('lastName', 'invalid')" class="invalid-feedback">
+        <div
+          class="error"
+          *ngIf="updateProfileForm.get('lastName').hasError('required')">
+          Last name is required
+        </div>
+        <div
+          class="error"
+          *ngIf="updateProfileForm.get('lastName').hasError('pattern')">
+          Last name must contain only letters
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <ion-label position="stacked">
+        {{ 'updateProfile.labelBirthday' | translate }}
+      </ion-label>
+      <ion-datetime
+        [ngClass]="{
+          'is-valid': isControlStatus('birthDay', 'valid'),
+          'is-invalid': isControlStatus('birthDay', 'invalid')
+        }"
+        formControlName="birthDay"
+        displayFormat="YYYY-MM-DD" 
+        pickerFormat="YYYY-MM-DD"
+        placeholder="{{ 'updateProfile.placeholderBirthday' | translate }}">
+      </ion-datetime>
+      <div *ngIf="isControlStatus('birthDay', 'invalid')" class="invalid-feedback">
+        <div
+          class="error"
+          *ngIf="updateProfileForm.get('birthDay').hasError('required')">
+          Birthday is required
+        </div>
+      </div>
+    </div>
+
+    <button
+      [disabled]="updateProfileForm.invalid"
+      type="submit"
+      class="pay-main-button">
+
+      {{ 'updateProfile.update' | translate }}
+    </button>
+  </form>
+</ion-content>

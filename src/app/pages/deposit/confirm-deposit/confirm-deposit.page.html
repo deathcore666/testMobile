@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-title>
+      {{ 'confirmDeposit.title' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding no-bounce>
+  <div *ngIf="response" class="pay-authentication-wrapper">
+    <form
+      #confirmForm="ngForm"
+      name="confirmForm"
+      class="pay-authentication"
+      (ngSubmit)="confirm()"
+      novalidate>
+
+      <ion-item no-padding>
+        <ion-label position="stacked">Account</ion-label>
+        <ion-select
+          [(ngModel)]="choosenAccount"
+          name="accounts"
+          placeholder="{{ 'confirmPurchase.placeholderChoosenAccount' | translate }}">
+
+          <ion-select-option
+            *ngFor="let account of accountsList"
+            [value]="account">
+            {{ account.shortAddress }} ({{ account.balance }}
+            {{ response.currencyCode }})
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding>
+        <ion-label position="stacked">Source amount</ion-label>
+        <ion-input
+          readonly
+          value="{{ response.sourceAmount }} {{ response.sourceCurrencyCode }}"
+          name="targetAmountInput"
+          targetAmountInput="ngModel"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding>
+        <ion-label position="stacked">Received amount</ion-label>
+        <ion-input
+          readonly
+          value="{{ response.targetAmount }} {{ response.targetCurrencyCode }}"
+          name="rateInput"
+          rateInput="ngModel"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding>
+        <ion-label position="stacked">Fee</ion-label>
+        <ion-input
+          readonly
+          [(ngModel)]="response.fee"
+          name="feeInput"
+          feeInput="ngModel"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding>
+        <ion-label position="stacked">Rate</ion-label>
+        <ion-input
+          readonly
+          [(ngModel)]="response.rate"
+          name="rateInput"
+          rateInput="ngModel"></ion-input>
+      </ion-item>
+
+      <div class="pay-transaction-footer">
+        <button
+          type="button"
+          (click)="cancel()"
+          class="pay-main-button pay-cancel-button">
+          {{ 'confirmDeposit.cancel' | translate }}
+        </button>
+
+        <button
+          [disabled]="!confirmForm.valid"
+          type="submit"
+          class="pay-main-button">
+          {{ 'confirmDeposit.confirm' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</ion-content>

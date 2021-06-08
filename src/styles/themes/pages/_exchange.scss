@@ -1,0 +1,20 @@
+.exchange-navigation {
+  display: flex;
+  justify-content: space-between;
+
+  .pay-main-button {
+    width: 45%;
+  }
+}
+
+app-exchange {
+
+  .wallet-not-fount {
+    font-style: italic;
+    font-size: 12px;
+  }
+
+  .select-disabled, .item-select-disabled ion-label {
+    opacity: 1;
+  }
+}

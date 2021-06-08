@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <button ion-button icon-only (click)="closeModal()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="searchbar-modal-wrapper">
+    <ion-searchbar (ionInput)="filterArray($event)"></ion-searchbar>
+
+    <ng-container *ngIf="availableCurrencies && availableCurrencies.length > 0; else allCur">
+      <ion-list class="default-currencies">
+        <h2>{{ 'searchBar.titles.availableCurrenciesTitle' | translate }}</h2>
+
+        <ion-item
+          *ngFor="let item of availableCurrencies"
+          no-padding
+          [ngClass]="{ 'item-checkbox-checked': item.selected }">
+
+          <ion-label (click)="chooseItem(item, availableCurrencies)">
+            <span>{{ item.name }}</span>
+            <span>{{ item.code }}</span>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+
+    <ng-template #allCur>
+      <ion-list class="default-currencies">
+        <h2 *ngIf="currency">{{ 'searchBar.titles.allCurrencies' | translate }}</h2>
+
+        <ion-item
+          *ngFor="let item of filteredArray"
+          no-padding
+          [ngClass]="{ 'item-checkbox-checked': item.selected }">
+
+          <ion-label (click)="chooseItem(item, filteredArray)">
+            {{ item.name }}
+            <span *ngIf="currency">{{ item.code }}</span>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-template>
+  </div>
+</ion-content>

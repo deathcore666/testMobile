@@ -1,0 +1,7 @@
+<button 
+  *ngFor="let tab of tabs" 
+  [routerLink]="tab.routerLink" 
+  routerLinkActive="active">
+  <img [src]="getTabImageSource(tab)">
+  <ion-label> {{ tab.name | translate }}</ion-label>
+</button>

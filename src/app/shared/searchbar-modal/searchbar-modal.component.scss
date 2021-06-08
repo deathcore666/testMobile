@@ -1,0 +1,15 @@
+.searchbar-modal-wrapper {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  ion-searchbar {
+    flex: 0 0 auto;
+  }
+
+  .default-currencies {
+    flex-grow: 1;
+    overflow: auto;
+  }
+}

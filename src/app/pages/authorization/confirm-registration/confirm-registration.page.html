@@ -1,0 +1,28 @@
+<ion-content padding no-bounce>
+  <div class="pay-authentication-wrapper">
+    <a class="pay-logo"></a>
+
+    <form
+      name="confirmRegistration"
+      (ngSubmit)="confirm()"
+      #confirmRegistration="ngForm"
+      class="pay-authentication"
+      novalidate>
+
+      <div class="pay-authentication-form">
+        <div class="pay-form-wrapper-title">
+          <h2>{{ 'confirmRegistration.title' | translate }}</h2>
+          <p>{{ 'confirmRegistration.notification' | translate }}</p>
+        </div>
+
+        <button
+          [disabled]="!confirmRegistration.valid"
+          type="submit"
+          class="pay-main-button">
+          
+          {{ 'common.confirm' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</ion-content>

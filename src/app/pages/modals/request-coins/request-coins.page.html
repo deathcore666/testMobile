@@ -1,0 +1,133 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+      <ion-buttons left>
+        <button ion-button icon-only (click)="goBack()">
+          <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+        </button>
+      </ion-buttons>
+    <ion-title>{{ 'requestFunds.title' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form *ngIf="step === 1"
+    #requestCoinsForm="ngForm"
+    name="requestCoinsForm"
+    class="pay-authentication"
+    (ngSubmit)="findUserAccounts()"
+    novalidate>
+
+    <ion-item no-padding [ngClass]="{ 'custom-has-error': amount <= 0 }">
+      <ion-label position="stacked">
+        {{ 'requestFunds.labelAmount' | translate }}
+      </ion-label>
+      <ion-input
+        #amountInput
+        name="amountInput"
+        type="number"
+        placeholder="0.01"
+        [(ngModel)]="amount"
+        step="any"
+        min="0"
+        required></ion-input>
+    </ion-item>
+
+    <ion-item no-padding>
+      <ion-label position="stacked">
+        {{ 'requestFunds.labelIdentifier' | translate }}
+      </ion-label>
+      <ion-input
+        #emailsInput
+        name="identifierInput"
+        type="text"
+        placeholder="{{ 'requestFunds.placeholderIdentifier' | translate }}"
+        [(ngModel)]="identifier"
+        required></ion-input>
+    </ion-item>
+
+    <ion-item no-padding>
+      <ion-label position="stacked">
+        {{ 'requestFunds.labelNotes' | translate }}
+      </ion-label>
+      <ion-input
+        #notesInput
+        name="notesInput"
+        placeholder="{{ 'requestFunds.placeholderNotes' | translate }}"
+        type="text"
+        [(ngModel)]="notes"></ion-input>
+    </ion-item>
+
+    <button
+      type="submit"
+      class="pay-main-button"
+      [disabled]="amount <= 0 || !requestCoinsForm.valid">
+
+      {{ 'common.continue' | translate }}
+    </button>
+  </form>
+
+  <form *ngIf="step === 2"
+    #requestCoinsFormStepTwo="ngForm"
+    name="requestCoinsFormStepTwo"
+    class="pay-authentication"
+    (ngSubmit)="sendWithEcosystem()"
+    novalidate>
+
+    <ion-item no-padding>
+      <ion-label position="stacked">
+        {{ 'requestFunds.labelUserAccount' | translate }}
+      </ion-label>
+      <ion-select 
+        [(ngModel)]="choosenEcosystem" 
+        (click)="openSelect()" 
+        (ngModelChange)="getRecepientData($event)" 
+        name='wallets' 
+        placeholder="{{ 'requestFunds.placeholderAccount' | translate }}"
+        required>
+
+        <ion-select-option
+          *ngFor="let account of userAccounts"
+          [class]="account.ecosystem"
+          [value]="account.ecosystem">
+          {{ account.ecosystem }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding *ngIf="amount && userAccounts">
+      <ion-label position="stacked">
+        {{ 'requestFunds.labelAmount' | translate }}
+      </ion-label>
+      <ion-input readonly value="{{amount}} {{currencyCode}}"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding *ngIf="recepientName && choosenEcosystem">
+      <ion-label position="stacked">
+        {{ 'requestFunds.recepient' | translate }}
+      </ion-label>
+      <ion-input 
+        readonly 
+        name="recepientNameInput" 
+        #recepientNameInput="ngModel" 
+        [(ngModel)]="recepientName"></ion-input>
+    </ion-item>
+
+    <div class="exchange-navigation">
+      <button
+        type="button"
+        class="pay-main-button"
+        (click)="previousStep()">
+  
+        {{ 'common.previous' | translate }}
+      </button>
+  
+      <button
+        type="submit"
+        class="pay-main-button"
+        [disabled]="!requestCoinsFormStepTwo.valid">
+  
+        {{ 'requestFunds.sendRequest' | translate }}
+      </button>
+    </div>
+  </form>
+</ion-content>

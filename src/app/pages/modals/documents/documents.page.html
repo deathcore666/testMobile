@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ 'documents.title' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding id="sumsub-websdk-container">
+  <form
+    [formGroup]="documentForm"
+    (ngSubmit)="sentDocuments()"
+    class="pay-authentication"
+    novalidate>
+
+    <div formGroupName="firstStep" *ngIf="uploadingStep === 1">
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'documents.labelCountry' | translate }}
+        </ion-label>
+        <ion-select
+          [selectedText]="itemFromModal"
+          formControlName="country"
+          readonly 
+          placeholder="{{ 'documents.placeholderCountry' | translate }}" 
+          (click)="openCountriesModal()"
+          name="countryInput">
+        </ion-select>
+      </div>
+
+      <div class="form-group">
+        <ion-label position="stacked">
+          {{ 'documents.labelDocumentType' | translate }}
+        </ion-label>
+        <ion-select
+          [interfaceOptions]="customAlertOptions"
+          [ngClass]="{
+            'is-valid': isControlStatus('firstStep', 'documentType', 'valid'),
+            'is-invalid': isControlStatus('firstStep', 'documentType', 'invalid')
+          }"
+          formControlName="documentType"
+          placeholder="{{ 'documents.placeholderDocumentType' | translate }}">
+
+          <ion-select-option
+            *ngFor="let document of documentTypeList"
+            [value]="document.value">
+            {{ document.name }}
+          </ion-select-option>
+        </ion-select>
+        <div *ngIf="isControlStatus('firstStep', 'documentType', 'invalid')" class="invalid-feedback">
+          <div
+            class="error"
+            *ngIf="documentForm.get('firstStep.documentType').hasError('required')">
+            Document type is required
+          </div>
+        </div>
+      </div>
+
+      <ion-item no-padding>
+        <ion-label id="custom-click">
+          <h4 (click)="presentActionSheet()" style="display:flex; justify-content: space-between;">
+            <span class="spinner-wrapper">
+              {{ 'documents.attach' | translate }}
+              <ion-spinner *ngIf="showLoading" name="crescent"></ion-spinner>
+            </span>
+            <ion-icon name="attach" style="font-size: 24px;"></ion-icon>
+          </h4>
+        </ion-label>
+      </ion-item>
+
+      <h4 *ngFor="let uploadedFile of savedUploadedFiles" style="text-transform: uppercase;">
+        {{ uploadedFile.name ? uploadedFile.name : 'image' }}
+        <button
+          type="button"
+          class="delete-upload-file"
+          (click)="removeUploadedFile(uploadedFile, savedUploadedFiles)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </h4>
+      <p class="pay-authentication-notify">
+        {{ 'documents.notification' | translate }}
+      </p>
+      <button
+          [disabled]="documentForm.invalid || !savedUploadedFiles.length"
+          type="submit"
+          class="pay-main-button">
+          {{ 'common.save' | translate }}
+        </button>
+    </div> 
+  </form>
+</ion-content>

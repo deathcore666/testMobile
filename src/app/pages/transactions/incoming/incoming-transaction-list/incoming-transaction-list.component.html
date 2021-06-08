@@ -1,0 +1,38 @@
+<ion-content overflow-scroll="true" class="ion-padding">
+  <ion-refresher (ionRefresh)="refresh($event)" slot="fixed">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      refreshingSpinner="dots">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ng-container *ngIf="incomeTransactionsList && incomeTransactionsList.length > 0">
+    <ion-card
+      *ngFor="let transaction of incomeTransactionsList"
+      (click)="openIncomingTransactionDetails(transaction.id, transaction.currencyType)">
+      <ion-card-content class="pay-card-content-wrapper">
+        <svg-icon 
+          [ngClass]="currencyNameStyle(transaction.currencyName)" 
+          src="./assets/images/coin-icons/{{transaction.currencyCode}}.svg"></svg-icon>
+        <div class="pay-card-content-wrapper-description">
+          <span
+            class="wallet-currency-name"
+            [ngClass]="currencyNameStyle(transaction.currencyName)">
+            {{ transaction.amount }} {{ transaction.currencyCode }} 
+          </span>
+          <div class="wallet-name">
+            {{ transaction.createdAt | date: "MMM d, y - H:mm:ss" }}
+            <span *ngIf="transaction.status" [ngClass]="transaction.status">{{ transaction.status }}</span>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <app-not-found
+    *ngIf="showNotFound"
+    [message]="message"
+    [title]="title">
+  </app-not-found>
+</ion-content>
+

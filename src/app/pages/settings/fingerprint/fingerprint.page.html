@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      {{ 'fingerprint.title' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding no-bounce>
+  <ion-item no-padding>
+    <ion-label>
+      {{ 'fingerprint.label' | translate }}      
+    </ion-label>
+    
+    <ion-toggle 
+      mode="ios"
+      [disabled]="authType === 'bio' || disabledFingerPrintFeature === true"
+      [(ngModel)]="isPinCodeSet" 
+      (ionChange)="togglePinCode()">
+    </ion-toggle>
+  </ion-item>
+
+  <p *ngIf="showButtonForChange">{{ message }}</p>
+
+  <button
+    *ngIf="showButtonForChange"
+    [disabled]="!showButtonForChange"
+    type="button"
+    (click)="showPincodeWindow('change')"
+    class="pay-main-button">
+
+    {{ 'fingerprint.buttonChange' | translate }}      
+  </button>
+</ion-content>

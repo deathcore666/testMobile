@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-title>
+      {{ 'confirmPurchase.title' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding no-bounce>
+  <div
+    *ngIf="response"
+    class="pay-authentication-wrapper">
+
+    <form
+      #confirmForm="ngForm"
+      name="confirmForm"
+      class="pay-authentication"
+      (ngSubmit)="confirm()"
+      novalidate>
+
+      <ion-item no-padding>
+        <ion-label position="stacked">
+          {{ 'confirmPurchase.labelChoosenAccount' | translate }}
+        </ion-label>
+        <ion-select 
+          [(ngModel)]="choosenWallet" 
+          name='wallets' 
+          placeholder="{{ 'confirmPurchase.placeholderChoosenAccount' | translate }}">
+          <ion-select-option
+            *ngFor="let wallet of walletsList"
+            [value]="wallet">
+
+            {{ wallet.name }}
+            <span class="wallet-balance">
+              {{ wallet.balance }} {{ response.currencyCode }}
+            </span>
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding>
+        <ion-label position="stacked">
+          {{ 'confirmPurchase.labelAmount' | translate }}
+        </ion-label>
+        <ion-input
+          #amountInput
+          name="amountInput"
+          readonly
+          [(ngModel)]="response.amount"
+          required></ion-input>
+      </ion-item>
+      
+      <ion-item no-padding class="internal-transactions-amount">
+        <ion-label position="stacked">
+          {{ 'confirmPurchase.labelCurrency' | translate }}
+        </ion-label>
+        <div>
+          <svg-icon 
+            class="currencyIcon" 
+            [ngClass]="currencyNameStyle(response.currencyName)"
+            src="./assets/images/coin-icons/{{response.currencyCode}}.svg"></svg-icon>
+          {{ response.currencyName }}
+        </div>
+      </ion-item>
+
+      <div class="pay-transaction-footer">
+        <button
+          type="button"
+          (click)="cancel()"
+          class="pay-main-button pay-cancel-button">
+
+          {{ 'confirmPurchase.cancel' | translate }}
+        </button>
+
+        <button
+          [disabled]="!confirmForm.valid"
+          type="submit"
+          class="pay-main-button">
+
+          {{ 'confirmPurchase.confirm' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</ion-content>

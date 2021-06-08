@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      {{ 'wallets.requisites.title' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="requisites">
+    <ng-container *ngFor="let item of requisites | keyvalue" >
+      <ng-container *ngIf="item.value">
+        <ng-container *ngIf="item.key !== '_id'">
+          <div *ngIf="item.key !== 'virtualAccount'" class="details-wrapper-information">
+            <h2>
+              {{ 'wallets.requisites.'+ item?.key | translate }}
+            </h2>
+            <p class="details-wrapper-wallet-address">
+              <span>{{ item?.value }}</span>
+              <ion-icon
+                class="copy-icon"
+                name="ios-copy"
+                (click)="successCopy(item.value)">
+              </ion-icon>
+            </p>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</ion-content>

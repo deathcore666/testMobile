@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button (click)="closeModal()" ion-button icon-only>
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title> {{ 'outgoingTransactionDetails.title' | translate }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf='transaction'>
+    <div *ngIf="transaction.type === 'blockchain'" class="info">
+      <button
+        [class.has-info-icon]="showVerifyButton"
+        [disabled]="showVerifyButton"
+        (click)="verifyInBlockchain()"
+        class="pay-main-button">
+        <ion-icon name="checkbox-outline"></ion-icon>
+        {{ 'common.verifyTransaction' | translate }}
+      </button>
+      <ion-icon (click)="showTips()" *ngIf="showVerifyButton" class="help" mode="ios" name="help"></ion-icon>
+    </div>
+
+    <div class="details-wrapper-information">
+      <h2>{{ 'outgoingTransactionDetails.amount' | translate }}</h2>
+      <p>
+        {{ transaction.amount }} {{ transaction.currencyCode }}
+      </p>
+    </div>
+
+    <div class="details-wrapper-information">
+      <h2>{{ 'outgoingTransactionDetails.fromAddress' | translate }}</h2>
+      <p class="details-wrapper-wallet-address">
+        <span>{{ transaction.fromAddress }}</span>
+        <ion-icon
+          class="copy-icon"
+          name="ios-copy"
+          (click)="successCopy(transaction.fromAddress)">
+        </ion-icon>
+      </p>
+    </div>
+
+    <div class="details-wrapper-information">
+      <h2>{{ 'outgoingTransactionDetails.toAddress' | translate }}</h2>
+      <p class="details-wrapper-wallet-address">
+        <span>{{ transaction.toAddress }}</span>
+        <ion-icon
+          class="copy-icon"
+          name="ios-copy"
+          (click)="successCopy(transaction.toAddress)">
+        </ion-icon>
+      </p>
+    </div>
+
+    <div class="details-wrapper-information" *ngIf="transaction.blockchainHash">
+      <h2>{{ 'incomingTransactionDetails.transactionId' | translate }}</h2>
+      <p class="details-wrapper-wallet-address">
+        <span>{{ transaction.blockchainHash }}</span>
+        <ion-icon
+          class="copy-icon"
+          name="ios-copy"
+          (click)="successCopy(transaction.blockchainHash)">
+        </ion-icon>
+      </p>
+    </div>
+    
+    <div class="details-wrapper-information">
+      <h2>{{ 'outgoingTransactionDetails.createdAt' | translate }}</h2>
+      <p>{{ transaction.createdAt | date: 'MMM d, y - H:mm:ss' }}</p>
+    </div>
+
+    <div class="details-wrapper-information">
+      <h2>{{ 'outgoingTransactionDetails.fee' | translate }}</h2>
+      <p>{{ transaction.fee }}</p>
+    </div>
+
+    <div class="details-wrapper-information">
+      <h2>{{ 'outgoingTransactionDetails.type' | translate }}</h2>
+      <p>{{ transaction.type | titlecase }}</p>
+    </div>
+
+    <div *ngIf="transaction.notes" class="details-wrapper-information">
+      <h2>{{ 'outgoingTransactionDetails.notes' | translate }}</h2>
+      <p>{{ transaction.notes }}</p>
+    </div>
+  </div>
+</ion-content>

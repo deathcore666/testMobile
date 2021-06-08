@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ 'smartSendFunds.title' | translate }}</ion-title>  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form
+    [formGroup]="sendCoinsForm"
+    (ngSubmit)="send()"
+    novalidate>
+
+    <ion-item no-padding>
+      <ion-label position="stacked">
+        {{ 'generateCryptoWallet.labelCurrency' | translate }}
+      </ion-label>
+      <ion-select
+        formControlName="currency"
+        (ionChange)="getWalletByCurrency()"
+        name='wallets' 
+        placeholder="{{ 'generateCryptoWallet.placeholderCurrency' | translate }}">
+
+        <ion-select-option
+          *ngFor="let currency of currenciesList"
+          [value]="currency.code">
+          {{ currency.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding>
+      <ion-label position="stacked">
+        {{ 'smartSendFunds.labelChoosenAccount' | translate }}
+      </ion-label>
+      <ion-select
+        formControlName="choosenWallet"
+        name='choosenWalet' 
+        placeholder="{{ 'smartSendFunds.placeholderToAddress' | translate }}">
+
+        <ion-select-option
+          *ngFor="let wallet of walletsList"
+          [value]="wallet">
+
+          {{ wallet.name }}
+          <span class="wallet-balance">
+            ({{ wallet.balance }}) {{ wallet.currencyCode }}
+          </span>
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding>
+      <ion-label position="stacked">
+        {{ 'smartSendFunds.toAddress' | translate }}
+      </ion-label>
+      <ion-input
+        formControlName="address"
+        name="toAddressInput"
+        type="text"
+        readonly
+        placeholder="{{ 'smartSendFunds.toAddress' | translate }}">
+      </ion-input>
+    </ion-item>
+
+    <ion-item no-padding>
+      <ion-label position="stacked">
+        {{ 'smartSendFunds.labelAmount' | translate }}
+      </ion-label>
+      <ion-input
+        formControlName="amount"
+        name="amountInput"
+        placeholder="{{ 'smartSendFunds.placeholderAddressAmount' | translate }}"
+        type="number">
+      </ion-input>
+    </ion-item>
+
+    <button
+      [disabled]="sendCoinsForm.invalid"
+      type="submit"
+      class="pay-main-button">
+
+      {{ 'common.send' | translate }}
+    </button>
+
+  </form>
+</ion-content>

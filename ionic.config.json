@@ -1,0 +1,7 @@
+{
+  "name": "crypto-ex",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

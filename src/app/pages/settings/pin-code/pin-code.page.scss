@@ -1,0 +1,21 @@
+ion-header {
+	margin-top: 20px;
+}
+
+.delete-pin-code {
+	--background: none;
+	--box-shadow: none;
+	--ripple-color: transparent;
+	border: none;
+	font-size: 12px;
+}
+
+.dots {
+	width: 13px;
+	height: 13px;
+	border-radius: 50%;
+	transition: all 0.1s ease-in-out;
+	margin: 0 5px;
+}
+
+  

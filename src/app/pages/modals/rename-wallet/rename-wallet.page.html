@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button (click)="goBack()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ setTitle() | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form
+    [formGroup]="renameWalletForm"
+    (ngSubmit)="change()"
+    class="pay-authentication"
+    novalidate>
+
+    <div class="form-group">
+      <ion-label position="stacked">
+        {{ setLabel() | translate }}
+      </ion-label>
+      <ion-input
+        [ngClass]="{
+          'is-valid': isControlStatus('name', 'valid'),
+          'is-invalid': isControlStatus('name', 'invalid')
+        }"
+        formControlName="name"
+        type="text"
+        placeholder="Enter wallet name"
+        autocomplete="off"
+        name="walletNameInput">
+      </ion-input>
+      <div *ngIf="isControlStatus('name', 'invalid')" class="invalid-feedback">
+        <div
+          class="error"
+          *ngIf="renameWalletForm.get('name').hasError('required')">
+          Name is required
+        </div>
+        <div
+          class="error"
+          *ngIf="renameWalletForm.get('name').hasError('minlength')">
+          Minimum wallet name length is 3 characters
+        </div>
+      </div>
+    </div>
+
+    <button
+      [disabled]="renameWalletForm.invalid"
+      type="submit"
+      class="pay-main-button">
+
+      {{ 'common.save' | translate }}
+    </button>
+  </form>
+</ion-content>
+

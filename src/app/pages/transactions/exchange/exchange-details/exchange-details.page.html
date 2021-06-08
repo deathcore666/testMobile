@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button (click)="closeModal()" ion-button icon-only>
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title> {{ 'exchangeDetails.title' | translate }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf='exchange'>
+    <div class="details-wrapper-information">
+      <h2>{{ 'exchangeDetails.labelExchangedAmount' | translate }} </h2>
+      <p>{{ exchange.exchangedAmount }} {{ exchange.exchangedCurrency }}</p>
+    </div>
+
+    <div class="details-wrapper-information">
+      <h2>{{ 'exchangeDetails.labelExchangedAddress' | translate }} </h2>
+      <p class="details-wrapper-wallet-address">
+        <span>{{ exchange.exchangedAddress }}</span>
+        <ion-icon
+          class="copy-icon"
+          name="ios-copy"
+          (click)="successCopy(exchange.exchangedAddress)">
+        </ion-icon>
+      </p>      
+    </div>
+  
+    <div class="details-wrapper-information">
+      <h2>{{ 'exchangeDetails.labelReceivingAmount' | translate }} </h2>
+      <p> {{ exchange.receivedAmount }} {{ exchange.receivedCurrency }} </p>
+    </div>
+  
+    <div class="details-wrapper-information">
+      <h2>{{ 'exchangeDetails.labelReceivingAddress' | translate }} </h2>
+      <p class="details-wrapper-wallet-address">
+        <span>{{ exchange.receivedAddress }}</span>
+        <ion-icon
+          class="copy-icon"
+          name="ios-copy"
+          (click)="successCopy(exchange.receivedAddress)">
+        </ion-icon>
+      </p> 
+    </div>
+  
+    <div class="details-wrapper-information">
+      <h2>{{ 'exchangeDetails.labelCreatedAt' | translate }} </h2>
+      <p> {{ exchange.createdAt | date: 'MMM d, y - H:mm:ss' }} </p>
+    </div>
+  </div>
+</ion-content>

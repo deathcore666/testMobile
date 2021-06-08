@@ -1,0 +1,134 @@
+<ion-header>
+  <ion-toolbar hideBackButton>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="stopRecognition()">
+        <ion-icon mode="ios" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title> Face recognition </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="main" style="height: 100%;" (resize)="onHeadResize()">
+    <section [hidden]="uuisplashHide" id="uuisplash">
+      <div id="uuiprompt" class="prompt">
+        <p data-res="prompt"></p>
+        <p id="uuierror" class="alert-danger"></p>
+      </div>
+    </section>
+    <section
+      [hidden]="uuiwebappHide"
+      id="uuiwebapp"
+      class="webapp"
+      style="height: 100%; display: block"
+    >
+      <div
+        id="uuiinstruction"
+        [hidden]="uuiinstructionHide"
+        class="instruction transparent-background"
+      >
+        {{ uuiinstruction }}
+      </div>
+      <canvas
+        [hidden]="uuicanvasHide"
+        id="uuicanvas"
+        #uuicanvas
+        class="liveview"
+        width="500"
+        height="500"
+      ></canvas>
+      <div [hidden]="uuimessageHide" id="uuimessage" class="message">
+        {{ uuimessage }}
+      </div>
+      <div [hidden]="uuiheadHide" id="uuihead" #uuihead class="head"></div>
+      <div class="uploadstatus">
+        <!-- status images for up to 4 recordings -->
+        <div [hidden]="uuiimageHide[0].hide" id="uuiimage1" class="image">
+          <div
+            [hidden]="uuiwaitHide[0].hide"
+            id="uuiwait1"
+            class="spinner spinner-wait"
+          ></div>
+          <div
+            [hidden]="uuiuploadHide[0].hide"
+            id="uuiupload1"
+            class="spinner spinner-upload"
+            data-res="uploadInfo"
+          >
+            Uploading...
+          </div>
+          <img
+            [hidden]="uuiuploadedHide[0].hide"
+            [src]="uuiuploadedHide[0].src"
+            id="uuiuploaded1"
+            class="image-uploaded"
+          />
+        </div>
+        <div [hidden]="uuiimageHide[1].hide" id="uuiimage2" class="image">
+          <div
+            [hidden]="uuiwaitHide[1].hide"
+            id="uuiwait2"
+            class="spinner spinner-wait"
+          ></div>
+          <div
+            [hidden]="uuiuploadHide[1].hide"
+            id="uuiupload2"
+            class="spinner spinner-upload"
+            data-res="uploadInfo"
+          >
+            Uploading...
+          </div>
+          <img
+            [hidden]="uuiuploadedHide[1].hide"
+            [src]="uuiuploadedHide[1].src"
+            id="uuiuploaded2"
+            class="image-uploaded"
+          />
+        </div>
+        <div [hidden]="uuiimageHide[2].hide" id="uuiimage3" class="image">
+          <div
+            [hidden]="uuiwaitHide[2].hide"
+            id="uuiwait3"
+            class="spinner spinner-wait"
+          ></div>
+          <div
+            [hidden]="uuiuploadHide[2].hide"
+            id="uuiupload3"
+            class="spinner spinner-upload"
+            data-res="uploadInfo"
+          >
+            Uploading...
+          </div>
+          <img
+            [hidden]="uuiuploadedHide[2].hide"
+            [src]="uuiuploadedHide[2].src"
+            id="uuiuploaded3"
+            class="image-uploaded"
+          />
+        </div>
+        <div [hidden]="uuiimageHide[3].hide" id="uuiimage4" class="image">
+          <div
+            [hidden]="uuiwaitHide[3].hide"
+            id="uuiwait4"
+            class="spinner spinner-wait"
+          ></div>
+          <div
+            [hidden]="uuiuploadHide[3].hide"
+            id="uuiupload4"
+            class="spinner spinner-upload"
+            data-res="uploadInfo"
+          >
+            Uploading...
+          </div>
+          <img
+            [hidden]="uuiuploadedHide[3].hide"
+            [src]="uuiuploadedHide[3].src"
+            id="uuiuploaded4"
+            class="image-uploaded"
+          />
+        </div>
+      </div>
+    </section>
+  </div>
+</ion-content>
